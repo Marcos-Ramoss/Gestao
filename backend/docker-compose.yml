@@ -1,12 +1,10 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql-breth
+    container_name: mysql-server
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: brethdb
-      MYSQL_USER: brethuser
-      MYSQL_PASSWORD: brethpass
+      MYSQL_DATABASE: gestao
     ports:
       - "3306:3306"
     volumes:

@@ -1,11 +1,11 @@
 spring:
   application:
-    name: otimizando_relatorios
+    name: srv_gestao
 
   datasource:
-    url: jdbc:mysql://localhost:3306/brethdb?createDatabaseIfNotExist=true
-    username: brethuser
-    password: brethpass
+    url: jdbc:mysql://localhost:3306/gestao?createDatabaseIfNotExist=true
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
