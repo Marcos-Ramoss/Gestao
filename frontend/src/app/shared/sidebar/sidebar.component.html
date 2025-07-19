@@ -1,0 +1,50 @@
+<div class="flex flex-col h-full w-60 bg-gray-50 text-gray-900 shadow-md rounded-xl">
+  <div class="flex items-center justify-center h-28 w-full border-b border-gray-200 overflow-hidden rounded-t-xl">
+    <img src="assets/logo.jpg" alt="Logo" class="w-full h-full object-cover cursor-pointer" (click)="goToWelcome()" />
+  </div>
+  <ul class="flex-1 flex flex-col px-2">
+    <li>
+      <span class="block text-xs font-bold text-gray-500 tracking-widest mb-2 mt-6">RELATÓRIOS</span>
+    </li>
+    <li>
+      <button (click)="goToUpload()" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-200 transition w-full font-semibold text-sm focus:bg-gray-200">
+        <i class="pi pi-dollar text-lg"></i>
+        <span>Faturamento</span>
+      </button>
+    </li>
+    <li>
+      <span class="block text-xs font-bold text-gray-500 tracking-widest mb-2 mt-6">ADMIN</span>
+    </li>
+    <li>
+      <button (click)="goToUsuarios()" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-200 transition w-full font-semibold text-sm focus:bg-gray-200">
+        <i class="pi pi-users text-lg"></i>
+        <span>Usuários</span>
+      </button>
+    </li>
+    <li>
+      <button (click)="goToAreas()" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-200 transition w-full font-semibold text-sm focus:bg-gray-200">
+        <i class="pi pi-briefcase text-lg"></i>
+        <span>Áreas</span>
+      </button>
+    </li>
+    <li>
+      <button (click)="goToContratos()" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-200 transition w-full font-semibold text-sm focus:bg-gray-200">
+        <i class="pi pi-file text-lg"></i>
+        <span>Contratos</span>
+      </button>
+    </li>
+    <li>
+      <span class="block text-xs font-bold text-gray-500 tracking-widest mb-2 mt-6">RECURSO</span>
+    </li>
+    <li>
+      <button (click)="goToColaborador()" class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-200 transition w-full font-semibold text-sm focus:bg-gray-200">
+        <i class="pi pi-users text-lg"></i>
+        <span>Colaborador</span>
+      </button>
+    </li>
+  </ul>
+
+  
+
+  
+</div> 

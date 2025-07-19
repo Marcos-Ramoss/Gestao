@@ -1,0 +1,45 @@
+<div class="flex justify-between items-center mb-4">
+  <h2 class="text-xl font-bold">Áreas</h2>
+  <button pButton type="button" label="Nova Área" class="p-button-success" (click)="novaArea()"></button>
+</div>
+
+<p *ngIf="erro" class="text-red-600 mb-2">{{ erro }}</p>
+
+<p-table [value]="areas" *ngIf="!carregando" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [responsiveLayout]="'scroll'">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th style="width: 120px;">Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-area>
+    <tr>
+      <td>{{ area.nome }}</td>
+      <td>
+        <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editarArea(area.id)" title="Editar"></button>
+        <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" style="color: #dc2626;" (click)="deletarArea(area.id)" title="Excluir"></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="2">Nenhuma área cadastrada.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div *ngIf="carregando" class="text-center py-8">
+  <i class="pi pi-spin pi-spinner text-2xl"></i> Carregando...
+</div>
+
+<p-dialog header="Editar Área" [(visible)]="mostrarModalEdicao" [modal]="true" [closable]="true" [style]="{width: '400px'}" (onHide)="fecharModalEdicao()">
+  <app-area-form *ngIf="mostrarModalEdicao" [area]="areaSelecionada || undefined" (salvo)="fecharModalEdicao(true)"></app-area-form>
+</p-dialog>
+
+<p-dialog header="Confirmar Exclusão" [(visible)]="mostrarConfirmacaoExclusao" [modal]="true" [closable]="false" [style]="{width: '350px'}">
+  <div class="py-4">Tem certeza que deseja excluir esta área?</div>
+  <div class="flex justify-end gap-2 mt-4">
+    <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="cancelarExclusao()"></button>
+    <button pButton type="button" label="Excluir" class="p-button-danger" (click)="confirmarExclusao()"></button>
+  </div>
+</p-dialog> 
