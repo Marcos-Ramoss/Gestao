@@ -1,0 +1,6 @@
+/* Classe utilitária para remover borda e sombra interna do conteúdo do PrimeNG Dialog (forçada) */
+.no-dialog-border .p-dialog-content, .no-dialog-border .p-dialog .p-dialog-content {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+} 

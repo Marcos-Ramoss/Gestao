@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="salvar()" class="flex flex-col gap-4">
+  <h3 class="text-xl font-bold mb-2">{{ contrato ? 'Editar Contrato' : 'Novo Contrato' }}</h3>
+  <div>
+    <label class="block text-sm font-medium mb-1">Código do Contrato</label>
+    <input pInputText formControlName="codigoContrato" [disabled]="!!contrato" class="w-full" />
+    <div *ngIf="form.get('codigoContrato')?.invalid && form.get('codigoContrato')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+  </div>
+  <div>
+    <label class="block text-sm font-medium mb-1">Área</label>
+    <select formControlName="idArea" class="w-full border rounded px-2 py-2">
+      <option value="" disabled selected>Selecione a área</option>
+      <option *ngFor="let area of areas" [value]="area.id">{{area.id}} - {{area.nome}}</option>
+    </select>
+    <div *ngIf="form.get('idArea')?.invalid && form.get('idArea')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+  </div>
+  <div *ngIf="erro" class="text-red-500 text-sm">{{ erro }}</div>
+  <div class="flex justify-end gap-2 mt-4">
+    <button pButton type="button" label="Cancelar" class="p-button-text" (click)="cancelar()" [disabled]="loading"></button>
+    <button pButton type="submit" label="Salvar" [loading]="loading"></button>
+  </div>
+</form> 

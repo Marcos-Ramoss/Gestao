@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+<div class="h-full w-full bg-white rounded-2xl shadow-lg p-12 flex flex-col items-center justify-center">
+  <form [formGroup]="perfilForm" class="w-full max-w-xl flex flex-col gap-8" (ngSubmit)="salvar()">
+    <h2 class="text-3xl font-bold text-center mb-4">Perfil do Usuário</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+      <div>
+        <label for="username" class="block text-base font-medium text-gray-700 mb-1">Usuário</label>
+        <input pInputText id="username" formControlName="username" type="text" class="w-full text-lg py-2 bg-gray-100" readonly />
+      </div>
+      <div>
+        <label for="nome" class="block text-base font-medium text-gray-700 mb-1">Nome</label>
+        <input pInputText id="nome" formControlName="nome" type="text" class="w-full text-lg py-2" [readonly]="!editando" [class.bg-gray-100]="!editando" />
+        <div *ngIf="perfilForm.get('nome')?.invalid && perfilForm.get('nome')?.touched" class="text-xs text-red-500 mt-1">Nome é obrigatório</div>
+      </div>
+      <div>
+        <label for="cpf" class="block text-base font-medium text-gray-700 mb-1">CPF</label>
+        <input pInputText id="cpf" formControlName="cpf" type="text" class="w-full text-lg py-2" maxlength="11" [readonly]="!editando" [class.bg-gray-100]="!editando" />
+        <div *ngIf="perfilForm.get('cpf')?.invalid && perfilForm.get('cpf')?.touched" class="text-xs text-red-500 mt-1">CPF deve conter 11 dígitos numéricos</div>
+      </div>
+    </div>
+    <div class="flex justify-center mt-6 gap-4">
+      <button *ngIf="!editando" type="button" pButton icon="pi pi-pencil" label="Editar" class="p-button-primary" (click)="habilitarEdicao()"></button>
+      <button *ngIf="editando" type="submit" pButton icon="pi pi-save" label="Salvar" class="p-button-success" [disabled]="perfilForm.invalid"></button>
+    </div>
+    <div *ngIf="erro" class="text-red-500 text-center mt-2">{{ erro }}</div>
+    <div *ngIf="sucesso" class="text-green-600 text-center mt-2">{{ sucesso }}</div>
+  </form>
+</div> 

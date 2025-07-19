@@ -1,0 +1,15 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-breth
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: brethdb
+      MYSQL_USER: brethuser
+      MYSQL_PASSWORD: brethpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    restart: always
+    command: --lower_case_table_names=1 

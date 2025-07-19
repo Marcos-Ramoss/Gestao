@@ -1,0 +1,64 @@
+# Build e dependências
+HELP.md
+target/
+build/
+dist/
+nbbuild/
+nbdist/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom.xml.bak
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
+.classpath
+.project
+.settings/
+.springBeans
+.sts4-cache
+.apt_generated
+.factorypath
+.nb-gradle/
+.vscode/
+*.code-workspace
+
+# SO e arquivos temporários
+.DS_Store
+*.log
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Dados sensíveis e configs locais
+.env
+.env.*
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+*.db
+*.sqlite
+*.old
+*.backup
+*.yml.local
+*.properties.local
+mysql-data/

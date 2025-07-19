@@ -1,0 +1,24 @@
+<app-toolbar (menuToggle)="toggleSidebar()"></app-toolbar>
+<div class="flex h-screen">
+    <app-sidebar *ngIf="visible"></app-sidebar>
+    <div class="flex-1 bg-gray-100 p-8 flex items-start justify-center overflow-auto">
+      <div class="w-full max-w-8xl mx-auto">
+        <app-welcome *ngIf="selectedPage === 'upload'"></app-welcome>
+        <app-upload-form *ngIf="selectedPage === 'faturamento'" (upload)="onUpload($event)"></app-upload-form>
+        <app-register-form *ngIf="selectedPage === 'usuarios'"></app-register-form>
+        <app-perfil *ngIf="selectedPage === 'perfil'"></app-perfil>
+        <app-recurso-list *ngIf="selectedPage === 'recursos'"></app-recurso-list>
+        <app-recurso-form *ngIf="selectedPage === 'recursosNovo'"></app-recurso-form>
+        <app-recurso-form *ngIf="selectedPage === 'recursosEditar'"></app-recurso-form>
+        <app-feriado-list *ngIf="selectedPage === 'feriados'"></app-feriado-list>
+        <app-feriado-form *ngIf="selectedPage === 'feriadosNovo'"></app-feriado-form>
+        <app-feriado-form *ngIf="selectedPage === 'feriadosEditar'"></app-feriado-form>
+        <app-area-list *ngIf="selectedPage === 'areas'"></app-area-list>
+        <app-area-form *ngIf="selectedPage === 'areasNovo'"></app-area-form>
+        <app-area-form *ngIf="selectedPage === 'areasEditar'"></app-area-form>
+        <app-contrato-list *ngIf="selectedPage === 'contratos'"></app-contrato-list>
+        <app-contrato-form *ngIf="selectedPage === 'contratosNovo'"></app-contrato-form>
+        <app-contrato-form *ngIf="selectedPage === 'contratosEditar'"></app-contrato-form>
+      </div>
+    </div>
+</div> 
