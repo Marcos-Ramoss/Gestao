@@ -4,18 +4,16 @@ import com.service.setebit.gestao.adapter.dto.FeriadoRequest;
 import com.service.setebit.gestao.adapter.dto.FeriadoResponse;
 import com.service.setebit.gestao.domain.FeriadoDomain;
 import com.service.setebit.gestao.domain.repository.FeriadoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class FeriadoService {
     private final FeriadoRepository repository;
-
-    public FeriadoService(FeriadoRepository repository) {
-        this.repository = repository;
-    }
 
     public FeriadoResponse criar(FeriadoRequest request) {
         FeriadoDomain domain = FeriadoDomain.builder()

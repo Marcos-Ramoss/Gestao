@@ -5,17 +5,15 @@ import com.service.setebit.gestao.adapter.dto.FaturamentoDetalheResponse;
 import com.service.setebit.gestao.domain.FaturamentoDetalheDomain;
 import com.service.setebit.gestao.domain.repository.FaturamentoDetalheRepository;
 
-import lombok.AllArgsConstructor;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FaturamentoDetalheService {
     
     private final FaturamentoDetalheRepository repository;

@@ -5,15 +5,14 @@ import com.service.setebit.gestao.adapter.dto.OrdemServicoResponse;
 import com.service.setebit.gestao.domain.OrdemServicoDomain;
 import com.service.setebit.gestao.domain.repository.OrdemServicoRepository;
 
-import lombok.AllArgsConstructor;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class OrdemServicoService {
     
     private final OrdemServicoRepository repository;

@@ -7,11 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class PdfExtratorUtil {
     public static Map<String, String> extrairInformacoes(MultipartFile pdfFile, String pastaDestino) throws IOException {

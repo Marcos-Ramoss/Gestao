@@ -2,6 +2,7 @@ package com.service.setebit.gestao.application.service;
 
 import com.service.setebit.gestao.domain.RelatorioAtividadeDomain;
 import com.service.setebit.gestao.domain.repository.RelatorioAtividadeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,13 +13,10 @@ import java.util.Map;
 import static com.service.setebit.gestao.application.service.PdfExtratorUtil.MesEnum;
 
 @Service
+@RequiredArgsConstructor
 public class RelatorioAtividadeService {
     private final RelatorioAtividadeRepository repository;
     private static final String PASTA_TXT = "files";
-
-    public RelatorioAtividadeService(RelatorioAtividadeRepository repository) {
-        this.repository = repository;
-    }
 
     public RelatorioAtividadeDomain processarUpload(MultipartFile pdfFile) {
         try {

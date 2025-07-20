@@ -6,23 +6,18 @@ import com.service.setebit.gestao.domain.FaturamentoDomain;
 import com.service.setebit.gestao.domain.repository.FaturamentoRepository;
 import com.service.setebit.gestao.infrastructure.entity.ContratoEntity;
 import com.service.setebit.gestao.infrastructure.repository.ContratoEntityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class FaturamentoService {
     private final FaturamentoRepository faturamentoRepository;
     private final ContratoEntityRepository contratoEntityRepository;
-
-    @Autowired
-    public FaturamentoService(FaturamentoRepository faturamentoRepository, ContratoEntityRepository contratoEntityRepository) {
-        this.faturamentoRepository = faturamentoRepository;
-        this.contratoEntityRepository = contratoEntityRepository;
-    }
 
     public FaturamentoResponse criar(FaturamentoRequest request) {
         ContratoEntity contrato = contratoEntityRepository.findById(request.codigoContrato())

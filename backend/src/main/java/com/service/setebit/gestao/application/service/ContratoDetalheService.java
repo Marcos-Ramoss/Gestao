@@ -4,18 +4,16 @@ import com.service.setebit.gestao.adapter.dto.ContratoDetalheRequest;
 import com.service.setebit.gestao.adapter.dto.ContratoDetalheResponse;
 import com.service.setebit.gestao.domain.ContratoDetalheDomain;
 import com.service.setebit.gestao.domain.repository.ContratoDetalheRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ContratoDetalheService {
     private final ContratoDetalheRepository repository;
-
-    public ContratoDetalheService(ContratoDetalheRepository repository) {
-        this.repository = repository;
-    }
 
     public ContratoDetalheResponse criar(ContratoDetalheRequest request) {
         ContratoDetalheDomain domain = ContratoDetalheDomain.builder()

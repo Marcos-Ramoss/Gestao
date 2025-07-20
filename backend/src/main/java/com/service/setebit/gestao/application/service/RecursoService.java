@@ -4,18 +4,16 @@ import com.service.setebit.gestao.adapter.dto.RecursoRequest;
 import com.service.setebit.gestao.adapter.dto.RecursoResponse;
 import com.service.setebit.gestao.domain.RecursoDomain;
 import com.service.setebit.gestao.domain.repository.RecursoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RecursoService {
     private final RecursoRepository repository;
-
-    public RecursoService(RecursoRepository repository) {
-        this.repository = repository;
-    }
 
     public RecursoResponse criar(RecursoRequest request) {
         RecursoDomain domain = RecursoDomain.builder()

@@ -5,14 +5,13 @@ import com.service.setebit.gestao.adapter.dto.AreaResponse;
 import com.service.setebit.gestao.domain.AreaDomain;
 import com.service.setebit.gestao.domain.repository.AreaRepository;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -20,7 +19,7 @@ import static java.util.stream.Collectors.toList;
  * Serviço responsável pela lógica de negócio relacionada às áreas.
  */
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class AreaService {
     
