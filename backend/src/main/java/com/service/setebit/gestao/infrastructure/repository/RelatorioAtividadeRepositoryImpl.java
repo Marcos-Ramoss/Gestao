@@ -2,21 +2,21 @@ package com.service.setebit.gestao.infrastructure.repository;
 
 import com.service.setebit.gestao.domain.RelatorioAtividadeDomain;
 import com.service.setebit.gestao.domain.repository.RelatorioAtividadeRepository;
+import com.service.setebit.gestao.infrastructure.entity.RecursoEntity;
 import com.service.setebit.gestao.infrastructure.entity.RelatorioAtividadeEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
+@RequiredArgsConstructor
 public class RelatorioAtividadeRepositoryImpl implements RelatorioAtividadeRepository {
     private final RelatorioAtividadeJpaRepository jpaRepository;
 
-    @Autowired
-    public RelatorioAtividadeRepositoryImpl(RelatorioAtividadeJpaRepository jpaRepository) {
-        this.jpaRepository = jpaRepository;
-    }
 
     @Override
     public RelatorioAtividadeDomain salvar(RelatorioAtividadeDomain relatorio) {
@@ -24,7 +24,7 @@ public class RelatorioAtividadeRepositoryImpl implements RelatorioAtividadeRepos
                 .cliente(relatorio.getCliente())
                 .ano(relatorio.getAno())
                 .mes(relatorio.getMes())
-                .colaborador(relatorio.getColaborador())
+                .recurso(RecursoEntity.builder().id(relatorio.getRecurso().getId()).build())
                 .nomeProjeto(relatorio.getNomeProjeto())
                 .horaTotalProjeto(relatorio.getHoraTotalProjeto())
                 .build();
@@ -45,7 +45,7 @@ public class RelatorioAtividadeRepositoryImpl implements RelatorioAtividadeRepos
                 .cliente(entity.getCliente())
                 .ano(entity.getAno())
                 .mes(entity.getMes())
-                .colaborador(entity.getColaborador())
+                //.colaborador(entity.getColaborador())
                 .nomeProjeto(entity.getNomeProjeto())
                 .horaTotalProjeto(entity.getHoraTotalProjeto())
                 .build();

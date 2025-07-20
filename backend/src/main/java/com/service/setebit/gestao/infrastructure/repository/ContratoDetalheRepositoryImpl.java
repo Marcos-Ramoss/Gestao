@@ -52,7 +52,7 @@ public class ContratoDetalheRepositoryImpl implements ContratoDetalheRepository 
     private ContratoDetalheDomain toDomain(ContratoDetalheEntity entity) {
         return ContratoDetalheDomain.builder()
                 .id(entity.getId())
-                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigoContrato() : null)
+                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigo() : null)
                 .preposto(entity.getPreposto())
                 .fiscal(entity.getFiscal())
                 .gestor(entity.getGestor())

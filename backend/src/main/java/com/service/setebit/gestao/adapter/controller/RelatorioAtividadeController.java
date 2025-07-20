@@ -22,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,13 +45,11 @@ public class RelatorioAtividadeController {
     })
     @PostMapping(value = "/upload/{ano}/{mes}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<List<RelatorioAtividadeDomain>> uploadRelatorios(
-            @Parameter(description = "Ano dos relatórios", required = true) @PathVariable Integer ano,
-            @Parameter(description = "Mês dos relatórios", required = true) @PathVariable Integer mes,
-            @Parameter(description = "Arquivos PDF dos relatórios", required = true) @RequestPart("files") MultipartFile[] files) {
+            @PathVariable Integer ano,
+            @PathVariable Integer mes,
+            @RequestPart("files") MultipartFile[] files) {
         log.info("Upload de {} relatórios para ano={}, mes={}", files.length, ano, mes);
-        List<RelatorioAtividadeDomain> relatorios = Arrays.stream(files)
-                .map(service::processarUpload)
-                .toList();
+        List<RelatorioAtividadeDomain> relatorios = service.processarUpload(files);
         log.info("Upload realizado com sucesso");
         return ResponseEntity.ok(relatorios);
     }
@@ -106,7 +103,7 @@ public class RelatorioAtividadeController {
             row.createCell(0).setCellValue(rel.getCliente());
             row.createCell(1).setCellValue(rel.getAno());
             row.createCell(2).setCellValue(rel.getMes());
-            row.createCell(3).setCellValue(rel.getColaborador());
+            row.createCell(3).setCellValue(rel.getId());
             row.createCell(4).setCellValue(rel.getNomeProjeto());
             row.createCell(5).setCellValue(rel.getHoraTotalProjeto() != null ? rel.getHoraTotalProjeto() : 0);
         }

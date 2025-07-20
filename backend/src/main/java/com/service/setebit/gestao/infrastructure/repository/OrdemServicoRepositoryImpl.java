@@ -48,7 +48,7 @@ public class OrdemServicoRepositoryImpl implements OrdemServicoRepository {
     private OrdemServicoDomain toDomain(OrdemServicoEntity entity) {
         return OrdemServicoDomain.builder()
                 .id(entity.getId())
-                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigoContrato() : null)
+                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigo() : null)
                 .numeroOs(entity.getNumeroOs())
                 .build();
     }

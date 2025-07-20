@@ -13,7 +13,7 @@ public class RelatorioAtividadeDomain {
     private String cliente;
     private Integer ano;
     private Integer mes;
-    private String colaborador;
+    private RecursoDomain recurso;
     private String nomeProjeto;
     private Double horaTotalProjeto;
 } 

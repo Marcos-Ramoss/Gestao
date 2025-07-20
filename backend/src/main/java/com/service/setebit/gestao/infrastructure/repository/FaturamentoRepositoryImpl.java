@@ -44,7 +44,7 @@ public class FaturamentoRepositoryImpl implements FaturamentoRepository {
     private FaturamentoDomain toDomain(FaturamentoEntity entity) {
         return FaturamentoDomain.builder()
                 .id(entity.getId())
-                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigoContrato() : null)
+                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigo() : null)
                 .objetivo(entity.getObjetivo())
                 .valor(entity.getValor())
                 .numeroMedicao(entity.getNumeroMedicao())
