@@ -7,9 +7,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 @Schema(description = "Dados de resposta de área")
 public record AreaResponse(
-    @Schema(description = "ID único da área", example = "1", required = true)
+    @Schema(description = "ID único da área", example = "1")
     Long id,
     
-    @Schema(description = "Nome da área", example = "Tecnologia da Informação", required = true)
+    @Schema(description = "Nome da área", example = "Tecnologia da Informação")
     String nome
 ) {} 

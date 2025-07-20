@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Serviço responsável pela lógica de negócio relacionada às áreas.
  */
@@ -72,7 +74,7 @@ public class AreaService {
         
         return areas.stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**

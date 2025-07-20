@@ -1,8 +1,8 @@
-# Contexto do Projeto - Otimizando Relatórios
+# Contexto do Projeto - Relatorio de Faturamento
 
 ## Visão Geral do Projeto
 
-**Nome:** Otimizando Relatórios  
+**Nome:** Relatorio de Faturamento
 **Tipo:** Sistema de Gestão de Contratos e Relatórios  
 **Tecnologia:** Java 17 + Spring Boot 3.5.3  
 **Arquitetura:** Clean Architecture  

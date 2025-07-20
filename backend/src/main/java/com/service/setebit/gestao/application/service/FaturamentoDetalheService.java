@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @AllArgsConstructor
 public class FaturamentoDetalheService {
@@ -28,7 +30,7 @@ public class FaturamentoDetalheService {
     }
 
     public List<FaturamentoDetalheResponse> listarTodos() {
-        return repository.listarTodos().stream().map(this::toResponse).collect(Collectors.toList());
+        return repository.listarTodos().stream().toList().stream().map(this::toResponse).collect(toList());
     }
 
     public Optional<FaturamentoDetalheResponse> buscarPorId(Long id) {
