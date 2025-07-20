@@ -1,9 +1,0 @@
-package com.breth.otimizando_relatorios.infrastructure.repository;
-
-import com.breth.otimizando_relatorios.infrastructure.entity.UserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
- 
-public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
-    Optional<UserEntity> findByUsername(String username);
-} 
