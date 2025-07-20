@@ -24,8 +24,9 @@ public class RelatorioAtividadeEntity {
     @Column(name = "mes", nullable = false)
     private Integer mes;
 
-    @Column(name = "colaborador", nullable = false, length = 100)
-    private String colaborador;
+    @ManyToOne
+    @JoinColumn(name = "id_recurso")
+    private RecursoEntity recurso;
 
     @Column(name = "nome_projeto", nullable = false, length = 100)
     private String nomeProjeto;

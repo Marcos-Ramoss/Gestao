@@ -15,20 +15,6 @@ CREATE TABLE `feriado` (
   PRIMARY KEY (`id_feriado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- gestao.relatorio_atividade definição
-
-CREATE TABLE `relatorio_atividade` (
-  `id_rel_ativ` bigint NOT NULL AUTO_INCREMENT,
-  `cliente` varchar(100) NOT NULL,
-  `ano` int NOT NULL,
-  `mes` int NOT NULL,
-  `colaborador` varchar(100) NOT NULL,
-  `nome_projeto` varchar(100) NOT NULL,
-  `hora_total_projeto` float NOT NULL,
-  PRIMARY KEY (`id_rel_ativ`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
 -- gestao.usuario definição
 
 CREATE TABLE `usuario` (
@@ -120,3 +106,19 @@ CREATE TABLE `recurso` (
   KEY `codigo_contrato` (`codigo_contrato`),
   CONSTRAINT `recurso_ibfk_1` FOREIGN KEY (`codigo_contrato`) REFERENCES `contrato` (`codigo_contrato`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- gestao.relatorio_atividade definição
+
+CREATE TABLE `relatorio_atividade` (
+  `id_rel_ativ` bigint NOT NULL AUTO_INCREMENT,
+  `cliente` varchar(100) NOT NULL,
+  `ano` int NOT NULL,
+  `mes` int NOT NULL,
+  `id_recurso` bigint NOT NULL,
+  `nome_projeto` varchar(100) NOT NULL,
+  `hora_total_projeto` float NOT NULL,
+  PRIMARY KEY (`id_rel_ativ`),
+  KEY `id_recurso` (`id_recurso`),
+  CONSTRAINT `recurso_id_ibfk_1` FOREIGN KEY (`id_recurso`) REFERENCES `recurso` (`id_recurso`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
