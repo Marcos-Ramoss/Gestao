@@ -5,7 +5,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "FERIADO")
+@Table(name = "feriado")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +13,9 @@ import java.time.LocalDate;
 public class FeriadoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_feriado")
     private Long id;
 
-    @Column(name = "DATA", nullable = false)
+    @Column(name = "data", nullable = false)
     private LocalDate data;
 } 

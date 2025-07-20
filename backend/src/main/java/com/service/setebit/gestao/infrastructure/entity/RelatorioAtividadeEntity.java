@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "RELATORIO_ATIVIDADE")
+@Table(name = "relatorio_atividade")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,12 +12,24 @@ import lombok.*;
 public class RelatorioAtividadeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rel_ativ")
     private Long id;
 
+    @Column(name = "cliente", nullable = false, length = 100)
     private String cliente;
+
+    @Column(name = "ano", nullable = false)
     private Integer ano;
+
+    @Column(name = "mes", nullable = false)
     private Integer mes;
+
+    @Column(name = "colaborador", nullable = false, length = 100)
     private String colaborador;
+
+    @Column(name = "nome_projeto", nullable = false, length = 100)
     private String nomeProjeto;
+
+    @Column(name = "hora_total_projeto", nullable = false)
     private Double horaTotalProjeto;
 } 

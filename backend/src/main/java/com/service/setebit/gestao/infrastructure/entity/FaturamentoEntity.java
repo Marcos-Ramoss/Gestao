@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "FATURAMENTO")
+@Table(name = "faturamento")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,11 +14,11 @@ import java.util.List;
 public class FaturamentoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_FATURAMENTO")
+    @Column(name = "id_faturamento")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CODIGO_CONTRATO")
+    @JoinColumn(name = "codigo_contrato")
     private ContratoEntity contrato;
 
     @Column(name = "OBJETIVO")

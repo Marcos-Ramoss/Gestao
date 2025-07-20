@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "CONTRATO_DETALHE")
+@Table(name = "contrato_detalhe")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,11 +12,11 @@ import lombok.*;
 public class ContratoDetalheEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_CONTRATO_DETALHE")
+    @Column(name = "id_cont_det")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CODIGO_CONTRATO")
+    @JoinColumn(name = "codigo_contrato")
     private ContratoEntity contrato;
 
     @Column(name = "PREPOSTO")
