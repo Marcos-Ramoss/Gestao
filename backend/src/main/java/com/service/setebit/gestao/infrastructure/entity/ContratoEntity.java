@@ -5,18 +5,18 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "CONTRATO")
+@Table(name = "contrato")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ContratoEntity {
     @Id
-    @Column(name = "CODIGO_CONTRATO")
-    private String codigoContrato;
+    @Column(name = "codigo_contrato")
+    private String codigo;
 
     @ManyToOne
-    @JoinColumn(name = "ID_AREA")
+    @JoinColumn(name = "id_area")
     private AreaEntity area;
 
     @OneToMany(mappedBy = "contrato")

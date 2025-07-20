@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,20 +12,21 @@ import lombok.*;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "username", nullable = false, unique = true, length = 100)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false, length = 50)
     private String role;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "cpf", nullable = false, unique = true, length = 11)
     private String cpf;
 } 

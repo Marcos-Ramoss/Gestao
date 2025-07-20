@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "RECURSO")
+@Table(name = "recurso")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,11 +12,11 @@ import lombok.*;
 public class RecursoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_RECURSO")
+    @Column(name = "id_recurso")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "CODIGO_CONTRATO")
+    @JoinColumn(name = "codigo_contrato")
     private ContratoEntity contrato;
 
     @Column(name = "NOME", nullable = false)

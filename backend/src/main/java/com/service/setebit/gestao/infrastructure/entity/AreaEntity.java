@@ -5,7 +5,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "AREA")
+@Table(name = "area")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,10 +13,10 @@ import java.util.List;
 public class AreaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_AREA")
+    @Column(name = "id_area")
     private Long id;
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "nome", nullable = false, length = 60)
     private String nome;
 
     @OneToMany(mappedBy = "area")

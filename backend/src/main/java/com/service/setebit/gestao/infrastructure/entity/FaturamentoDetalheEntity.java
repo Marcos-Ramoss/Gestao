@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "FATURAMENTO_DETALHE")
+@Table(name = "faturamento_detalhe")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,11 +12,11 @@ import lombok.*;
 public class FaturamentoDetalheEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_FATURAMENTO_DETALHE")
+    @Column(name = "id_faturamento_detalhe")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_FATURAMENTO")
+    @JoinColumn(name = "id_faturamento")
     private FaturamentoEntity faturamento;
 
     @Column(name = "DESCRICAO")
