@@ -22,5 +22,6 @@ export const appRoutes: Routes = [
     { path: 'app/contratos', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'app/contratos/novo', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'app/contratos/:codigoContrato/editar', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'app/ordens-servico', component: HomeComponent, canActivate: [AuthGuard] },
     
 ];

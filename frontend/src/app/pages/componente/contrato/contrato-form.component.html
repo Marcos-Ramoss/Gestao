@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <form [formGroup]="form" (ngSubmit)="salvar()" class="flex flex-col gap-4">
   <h3 class="text-xl font-bold mb-2">{{ contrato ? 'Editar Contrato' : 'Novo Contrato' }}</h3>
   <div>
@@ -7,10 +9,15 @@
   </div>
   <div>
     <label class="block text-sm font-medium mb-1">Área</label>
-    <select formControlName="idArea" class="w-full border rounded px-2 py-2">
-      <option value="" disabled selected>Selecione a área</option>
-      <option *ngFor="let area of areas" [value]="area.id">{{area.id}} - {{area.nome}}</option>
-    </select>
+    <p-dropdown
+      formControlName="idArea"
+      [options]="areas"
+      optionLabel="nome"
+      optionValue="id"
+      placeholder="Selecione a área"
+      class="w-full"
+      [class.ng-invalid]="form.get('idArea')?.invalid && form.get('idArea')?.touched">
+    </p-dropdown>
     <div *ngIf="form.get('idArea')?.invalid && form.get('idArea')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
   </div>
   <div *ngIf="erro" class="text-red-500 text-sm">{{ erro }}</div>

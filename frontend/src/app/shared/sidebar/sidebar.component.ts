@@ -51,4 +51,8 @@ export class SidebarComponent {
   goToContratos() {
     this.router.navigate(['/app/contratos']);
   }
+
+  goToOrdensServico() {
+    this.router.navigate(['/app/ordens-servico']);
+  }
 } 

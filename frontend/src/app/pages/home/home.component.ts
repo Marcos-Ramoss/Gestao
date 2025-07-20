@@ -1,33 +1,34 @@
-import { Component } from '@angular/core';
-import { DrawerModule } from 'primeng/drawer';
-import { ButtonModule } from 'primeng/button';
-import { ToolbarComponent } from '../../shared/toolbar/toolbar.component';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 import { NgIf } from '@angular/common';
-import { RegisterFormComponent } from '../componente/usuario/register-form.component';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PerfilComponent } from '../componente/usuario/perfil.component';
-import { WelcomeComponent } from '../componente/dashboard/welcome.component';
-import { UploadFormComponent } from '../componente/upload/upload-form.component';
-import { RecursoListComponent } from '../componente/recurso/recurso-list.component';
-import { RecursoFormComponent } from '../componente/recurso/recurso-form.component';
-import { FeriadoListComponent } from '../componente/feriado/feriado-list.component';
-import { FeriadoFormComponent } from '../componente/feriado/feriado-form.component';
-import { AreaListComponent } from '../componente/area/area-list.component';
+import { ButtonModule } from 'primeng/button';
+import { DrawerModule } from 'primeng/drawer';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
+import { ToolbarComponent } from '../../shared/toolbar/toolbar.component';
 import { AreaFormComponent } from '../componente/area/area-form.component';
-import { ContratoListComponent } from '../componente/contrato/contrato-list.component';
+import { AreaListComponent } from '../componente/area/area-list.component';
 import { ContratoFormComponent } from "../componente/contrato/contrato-form.component";
+import { ContratoListComponent } from '../componente/contrato/contrato-list.component';
+import { WelcomeComponent } from '../componente/dashboard/welcome.component';
+import { FeriadoFormComponent } from '../componente/feriado/feriado-form.component';
+import { FeriadoListComponent } from '../componente/feriado/feriado-list.component';
+import { OrdemServicoListComponent } from '../componente/ordem-servico/ordem-servico-list.component';
+import { RecursoFormComponent } from '../componente/recurso/recurso-form.component';
+import { RecursoListComponent } from '../componente/recurso/recurso-list.component';
+import { UploadFormComponent } from '../componente/upload/upload-form.component';
+import { PerfilComponent } from '../componente/usuario/perfil.component';
+import { RegisterFormComponent } from '../componente/usuario/register-form.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
-  imports: [DrawerModule, ButtonModule, ToolbarComponent, SidebarComponent, NgIf, RegisterFormComponent, PerfilComponent, WelcomeComponent, UploadFormComponent, RecursoListComponent, RecursoFormComponent, FeriadoListComponent, FeriadoFormComponent, AreaListComponent, AreaFormComponent, ContratoListComponent, ContratoFormComponent]
+  imports: [DrawerModule, ButtonModule, ToolbarComponent, SidebarComponent, NgIf, RegisterFormComponent, PerfilComponent, WelcomeComponent, UploadFormComponent, RecursoListComponent, RecursoFormComponent, FeriadoListComponent, FeriadoFormComponent, AreaListComponent, AreaFormComponent, ContratoListComponent, ContratoFormComponent, OrdemServicoListComponent]
 })
 export class HomeComponent {
   visible: boolean = true; // Sidebar aberta por padrão
   selected: 'login' | 'upload' = 'login';
-  selectedPage: 'upload' | 'usuarios' | 'perfil' | 'faturamento' | 'recursos' | 'recursosNovo' | 'recursosEditar' | 'feriados' | 'feriadosNovo' | 'feriadosEditar' | 'areas' | 'areasNovo' | 'areasEditar' | 'contratos' | 'contratosNovo' | 'contratosEditar' = 'upload';
+  selectedPage: 'upload' | 'usuarios' | 'perfil' | 'faturamento' | 'recursos' | 'recursosNovo' | 'recursosEditar' | 'feriados' | 'feriadosNovo' | 'feriadosEditar' | 'areas' | 'areasNovo' | 'areasEditar' | 'contratos' | 'contratosNovo' | 'contratosEditar' | 'ordensServico' = 'upload';
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -63,6 +64,8 @@ export class HomeComponent {
         this.selectedPage = 'contratosEditar';
       } else if (this.router.url.endsWith('/contratos')) {
         this.selectedPage = 'contratos';
+      } else if (this.router.url.endsWith('/ordens-servico')) {
+        this.selectedPage = 'ordensServico';
       } else {
         this.selectedPage = 'upload';
       }

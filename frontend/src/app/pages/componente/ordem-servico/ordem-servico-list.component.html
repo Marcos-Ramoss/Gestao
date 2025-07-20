@@ -1,0 +1,147 @@
+<p-toast></p-toast>
+
+<div class="card">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold text-gray-800">Ordens de Serviço</h2>
+    <button 
+      pButton 
+      type="button" 
+      label="Nova Ordem de Serviço" 
+      icon="pi pi-plus" 
+      class="p-button-success"
+      (click)="novaOrdemServico()">
+    </button>
+  </div>
+
+  <div *ngIf="carregando" class="flex justify-center items-center py-8">
+    <i class="pi pi-spin pi-spinner text-4xl text-blue-500"></i>
+  </div>
+
+  <div *ngIf="erro" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    {{ erro }}
+  </div>
+
+  <p-table 
+    *ngIf="!carregando && !erro" 
+    [value]="ordensServico" 
+    [paginator]="true" 
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    styleClass="p-datatable-sm">
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Código do Contrato</th>
+        <th>Número da OS</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-ordemServico>
+      <tr>
+        <td>{{ ordemServico.id }}</td>
+        <td>{{ ordemServico.codigoContrato }}</td>
+        <td>{{ ordemServico.numeroOs }}</td>
+        <td>
+          <div class="flex gap-2">
+            <button 
+              pButton 
+              type="button" 
+              icon="pi pi-pencil" 
+              class="p-button-sm p-button-outlined p-button-primary"
+              (click)="editarOrdemServico(ordemServico.id)"
+              pTooltip="Editar">
+            </button>
+            <button 
+              pButton 
+              type="button" 
+              icon="pi pi-trash" 
+              class="p-button-sm p-button-outlined p-button-danger"
+              (click)="deletarOrdemServico(ordemServico.id)"
+              pTooltip="Excluir">
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4" class="text-center py-8 text-gray-500">
+          Nenhuma ordem de serviço encontrada.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Modal de Criação -->
+<p-dialog 
+  [(visible)]="mostrarModalCriacao" 
+  header="Nova Ordem de Serviço" 
+  [modal]="true" 
+  [style]="{width: '50vw'}"
+  [draggable]="false" 
+  [resizable]="false">
+  
+  <app-ordem-servico-form 
+    [ordemServico]="null"
+    (salvo)="fecharModalCriacao(true)"
+    (cancelado)="fecharModalCriacao()">
+  </app-ordem-servico-form>
+</p-dialog>
+
+<!-- Modal de Edição -->
+<p-dialog 
+  [(visible)]="mostrarModalEdicao" 
+  header="Editar Ordem de Serviço" 
+  [modal]="true" 
+  [style]="{width: '50vw'}"
+  [draggable]="false" 
+  [resizable]="false">
+  
+  <app-ordem-servico-form 
+    *ngIf="ordemServicoSelecionada"
+    [ordemServico]="ordemServicoSelecionada"
+    (salvo)="fecharModalEdicao(true)"
+    (cancelado)="fecharModalEdicao()">
+  </app-ordem-servico-form>
+</p-dialog>
+
+<!-- Modal de Confirmação de Exclusão -->
+<p-dialog 
+  [(visible)]="mostrarConfirmacaoExclusao" 
+  header="Confirmar Exclusão" 
+  [modal]="true" 
+  [style]="{width: '400px'}"
+  [draggable]="false" 
+  [resizable]="false">
+  
+  <div class="text-center py-4">
+    <i class="pi pi-exclamation-triangle text-4xl text-yellow-500 mb-4"></i>
+    <p class="text-lg mb-4">Tem certeza que deseja excluir esta ordem de serviço?</p>
+    <p class="text-sm text-gray-600">Esta ação não pode ser desfeita.</p>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <button 
+        pButton 
+        type="button" 
+        label="Cancelar" 
+        class="p-button-outlined"
+        (click)="cancelarExclusao()">
+      </button>
+      <button 
+        pButton 
+        type="button" 
+        label="Excluir" 
+        class="p-button-danger"
+        (click)="confirmarExclusao()">
+      </button>
+    </div>
+  </ng-template>
+</p-dialog> 

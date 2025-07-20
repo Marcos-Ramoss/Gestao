@@ -11,7 +11,6 @@ nbdist/
 *.ear
 *.nar
 mysql-data
-..files/
 # Maven
 .mvn/wrapper/maven-wrapper.jar
 pom.xml.tag
