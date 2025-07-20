@@ -1,13 +1,18 @@
 package com.service.setebit.gestao.application.service;
 
+import com.service.setebit.gestao.domain.RecursoDomain;
 import com.service.setebit.gestao.domain.RelatorioAtividadeDomain;
+import com.service.setebit.gestao.domain.repository.RecursoRepository;
 import com.service.setebit.gestao.domain.repository.RelatorioAtividadeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import static com.service.setebit.gestao.application.service.PdfExtratorUtil.MesEnum;
@@ -15,8 +20,16 @@ import static com.service.setebit.gestao.application.service.PdfExtratorUtil.Mes
 @Service
 @RequiredArgsConstructor
 public class RelatorioAtividadeService {
-    private final RelatorioAtividadeRepository repository;
+    private final RelatorioAtividadeRepository RelatorioAtividadeRepository;
+    private final RecursoRepository recursoRepository;
     private static final String PASTA_TXT = "files";
+
+    @Transactional
+    public List<RelatorioAtividadeDomain> processarUpload(MultipartFile[] files) {
+        List<RelatorioAtividadeDomain> resultado = new ArrayList<>();
+        Arrays.stream(files).forEach( pdfFile -> resultado.add(processarUpload(pdfFile)));
+        return resultado;
+    }
 
     public RelatorioAtividadeDomain processarUpload(MultipartFile pdfFile) {
         try {
@@ -30,25 +43,27 @@ public class RelatorioAtividadeService {
             // Conversão do mês de String para Integer usando o enum
             Integer mesInt = MesEnum.fromString(info.get("mes"));
 
+            RecursoDomain recursoDomain = recursoRepository.buscarRecursoPorNome(info.getOrDefault("colaborador", ""));
+
             // Monta o objeto de domínio manualmente (builder manual)
             RelatorioAtividadeDomain relatorio = RelatorioAtividadeDomain.builder()
                     .cliente(info.getOrDefault("cliente", ""))
                     .ano(parseIntSafe(info.get("ano")))
                     .mes(mesInt)
-                    .colaborador(info.getOrDefault("colaborador", ""))
+                    .recurso(recursoDomain)
                     .nomeProjeto(info.getOrDefault("nomeProjeto", ""))
                     .horaTotalProjeto(parseDoubleSafe(info.get("horaTotalProjeto")))
                     .build();
 
             // Persiste (mock)
-            return repository.salvar(relatorio);
+            return RelatorioAtividadeRepository.salvar(relatorio);
         } catch (IOException e) {
             throw new RuntimeException("Erro ao processar PDF", e);
         }
     }
 
     public List<RelatorioAtividadeDomain> listarTodos() {
-        return repository.listarTodos();
+        return RelatorioAtividadeRepository.listarTodos();
     }
 
     private Integer parseIntSafe(String valor) {

@@ -27,7 +27,7 @@ public class ContratoRepositoryImpl implements ContratoRepository {
         AreaEntity area = areaRepository.findById(contrato.getIdArea())
                 .orElseThrow(() -> new IllegalArgumentException("Área não encontrada"));
         ContratoEntity entity = new ContratoEntity();
-        entity.setCodigoContrato(contrato.getCodigoContrato());
+        entity.setCodigo(contrato.getCodigoContrato());
         entity.setArea(area);
         entity = jpaRepository.save(entity);
         return toDomain(entity);
@@ -50,7 +50,7 @@ public class ContratoRepositoryImpl implements ContratoRepository {
 
     private ContratoDomain toDomain(ContratoEntity entity) {
         return ContratoDomain.builder()
-                .codigoContrato(entity.getCodigoContrato())
+                .codigoContrato(entity.getCodigo())
                 .idArea(entity.getArea() != null ? entity.getArea().getId() : null)
                 .build();
     }

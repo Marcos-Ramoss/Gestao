@@ -3,6 +3,8 @@ package com.service.setebit.gestao.infrastructure.repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.service.setebit.gestao.infrastructure.exception.RecursoNaoEncontradoException;
 import org.springframework.stereotype.Repository;
 import com.service.setebit.gestao.domain.RecursoDomain;
 import com.service.setebit.gestao.domain.repository.RecursoRepository;
@@ -49,9 +51,17 @@ public class RecursoRepositoryImpl implements RecursoRepository {
     private RecursoDomain toDomain(RecursoEntity entity) {
         return RecursoDomain.builder()
                 .id(entity.getId())
-                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigoContrato() : null)
+                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigo() : null)
                 .nome(entity.getNome())
                 .fatorAjuste(entity.getFatorAjuste())
                 .build();
+    }
+
+    public RecursoDomain buscarRecursoPorNome(String nome) {
+        Optional<RecursoEntity> recursoOpt = jpaRepository.findFirstByNomeIgnoreCase(nome);
+        if (recursoOpt.isEmpty()) {
+            throw new RecursoNaoEncontradoException("Recurso com nome '" + nome + "' não encontrado");
+        }
+        return toDomain(recursoOpt.get());
     }
 } 
