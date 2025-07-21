@@ -1,0 +1,40 @@
+<p-toast></p-toast>
+
+<div class="flex flex-col gap-4 w-full">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-bold">Detalhes do Contrato</h2>
+  </div>
+  <table class="w-full border border-gray-200 rounded-lg overflow-hidden">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-4 py-2 text-left font-semibold">ID</th>
+        <th class="px-4 py-2 text-left font-semibold">Preposto</th>
+        <th class="px-4 py-2 text-left font-semibold">Fiscal</th>
+        <th class="px-4 py-2 text-left font-semibold">Gestor</th>
+        <th class="px-4 py-2 text-left font-semibold">Objeto</th>
+        <th class="px-4 py-2 text-left font-semibold">Processo SEI</th>
+        <th class="px-4 py-2 text-center font-semibold">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detalhe of detalhes" class="border-b border-gray-100">
+        <td class="px-4 py-2 text-left">{{ detalhe.id }}</td>
+        <td class="px-4 py-2 text-left">{{ detalhe.preposto }}</td>
+        <td class="px-4 py-2 text-left">{{ detalhe.fiscal }}</td>
+        <td class="px-4 py-2 text-left">{{ detalhe.gestor }}</td>
+        <td class="px-4 py-2 text-left">{{ detalhe.objeto }}</td>
+        <td class="px-4 py-2 text-left">{{ detalhe.processoSei }}</td>
+        <td class="px-4 py-2 text-center">
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm" (click)="editarDetalhe(detalhe)"></button>
+          <button pButton icon="pi pi-trash text-red-500" class="p-button-text p-button-sm" (click)="deletarDetalhe(detalhe)"></button>
+        </td>
+      </tr>
+      <tr *ngIf="detalhes.length === 0">
+        <td colspan="7" class="text-center text-gray-500 py-4">Nenhum detalhe cadastrado.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p-dialog [(visible)]="mostrarForm" [modal]="true" [closable]="false" [style]="{width: '600px'}">
+    <app-contrato-detalhe-form [detalhe]="detalheSelecionado" [codigoContrato]="codigoContrato" (fechar)="fecharForm($event)"></app-contrato-detalhe-form>
+  </p-dialog>
+</div> 

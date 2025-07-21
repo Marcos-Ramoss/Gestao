@@ -64,4 +64,11 @@ public class RecursoRepositoryImpl implements RecursoRepository {
         }
         return toDomain(recursoOpt.get());
     }
+
+    public List<RecursoDomain> buscarPorCodigoContrato(String codigoContrato) {
+        return jpaRepository.findByContrato_Codigo(codigoContrato)
+                .stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
 } 

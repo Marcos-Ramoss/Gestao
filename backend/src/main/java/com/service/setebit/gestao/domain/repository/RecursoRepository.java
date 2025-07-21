@@ -10,4 +10,5 @@ public interface RecursoRepository {
     RecursoDomain buscarRecursoPorNome(String nome);
     List<RecursoDomain> listarTodos();
     void deletarPorId(Long id);
+    List<RecursoDomain> buscarPorCodigoContrato(String codigoContrato);
 } 

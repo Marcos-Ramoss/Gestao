@@ -4,8 +4,10 @@ import com.service.setebit.gestao.adapter.dto.RecursoRequest;
 import com.service.setebit.gestao.adapter.dto.RecursoResponse;
 import com.service.setebit.gestao.domain.RecursoDomain;
 import com.service.setebit.gestao.domain.repository.RecursoRepository;
+import com.service.setebit.gestao.infrastructure.repository.RelatorioAtividadeJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RecursoService {
     private final RecursoRepository repository;
+    private final RelatorioAtividadeJpaRepository relatorioAtividadeJpaRepository;
 
     public RecursoResponse criar(RecursoRequest request) {
         RecursoDomain domain = RecursoDomain.builder()
@@ -44,8 +47,16 @@ public class RecursoService {
         return toResponse(atualizado);
     }
 
+    @Transactional
     public void deletar(Long id) {
+        // Exclui todos os relatórios de atividade relacionados ao recurso
+        relatorioAtividadeJpaRepository.deleteByRecurso_Id(id);
+        // Agora exclui o recurso
         repository.deletarPorId(id);
+    }
+
+    public List<RecursoDomain> buscarPorCodigoContrato(String codigoContrato) {
+        return repository.buscarPorCodigoContrato(codigoContrato);
     }
 
     private RecursoResponse toResponse(RecursoDomain domain) {

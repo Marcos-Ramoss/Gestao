@@ -1,0 +1,37 @@
+<p-toast></p-toast>
+
+<form [formGroup]="form" (ngSubmit)="salvar()" class="flex flex-col gap-4">
+  <h3 class="text-xl font-bold mb-2">{{ detalhe ? 'Editar Detalhe' : 'Novo Detalhe' }}</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm font-medium mb-1">Preposto *</label>
+      <input pInputText formControlName="preposto" class="w-full" />
+      <div *ngIf="form.get('preposto')?.invalid && form.get('preposto')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Fiscal *</label>
+      <input pInputText formControlName="fiscal" class="w-full" />
+      <div *ngIf="form.get('fiscal')?.invalid && form.get('fiscal')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Gestor *</label>
+      <input pInputText formControlName="gestor" class="w-full" />
+      <div *ngIf="form.get('gestor')?.invalid && form.get('gestor')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-1">Objeto *</label>
+      <input pInputText formControlName="objeto" class="w-full" />
+      <div *ngIf="form.get('objeto')?.invalid && form.get('objeto')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+    </div>
+    <div class="md:col-span-2">
+      <label class="block text-sm font-medium mb-1">Processo SEI *</label>
+      <input pInputText formControlName="processoSei" class="w-full" />
+      <div *ngIf="form.get('processoSei')?.invalid && form.get('processoSei')?.touched" class="text-xs text-red-500">Campo obrigatório</div>
+    </div>
+  </div>
+  <div *ngIf="erro" class="text-red-500 text-sm">{{ erro }}</div>
+  <div class="flex justify-end gap-2 mt-4">
+    <button pButton type="button" label="Cancelar" class="p-button-text" (click)="cancelar()" [disabled]="loading"></button>
+    <button pButton type="submit" [label]="detalhe ? 'Atualizar' : 'Salvar'" [loading]="loading"></button>
+  </div>
+</form> 

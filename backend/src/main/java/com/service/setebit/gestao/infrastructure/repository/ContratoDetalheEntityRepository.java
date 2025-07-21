@@ -4,4 +4,5 @@ import com.service.setebit.gestao.infrastructure.entity.ContratoDetalheEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ContratoDetalheEntityRepository extends JpaRepository<ContratoDetalheEntity, Long> {
+    void deleteByContrato_Codigo(String codigoContrato);
 } 
