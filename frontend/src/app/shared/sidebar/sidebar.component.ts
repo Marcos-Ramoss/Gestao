@@ -28,6 +28,10 @@ export class SidebarComponent {
     this.router.navigate(['/app/faturamento']);
   }
 
+  goToRelatorioAtividade() {
+    this.router.navigate(['/app/relatorio-atividade']);
+  }
+
   goToUsuarios() {
     this.router.navigate(['/app/usuarios']);
   }

@@ -12,10 +12,6 @@ import java.time.LocalDate;
 @Builder
 public class FeriadoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_feriado")
-    private Long id;
-
     @Column(name = "data", nullable = false)
     private LocalDate data;
 } 

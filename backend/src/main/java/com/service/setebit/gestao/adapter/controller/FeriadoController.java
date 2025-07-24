@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -45,7 +47,7 @@ public class FeriadoController {
             @Valid @RequestBody FeriadoRequest request) {
         log.info("Criando feriado: {}", request);
         FeriadoResponse response = service.criar(request);
-        log.info("Feriado criado com sucesso: {}", response.id());
+        log.info("Feriado criado com sucesso: {}", response.data());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -67,26 +69,25 @@ public class FeriadoController {
 
     /**
      * Busca um feriado pelo ID.
-     * @param id ID do feriado
+     * @param data ID do feriado
      * @return Feriado encontrado ou 404
      */
-    @GetMapping("/{id}")
+    @GetMapping("/{data}")
     @Operation(summary = "Buscar feriado por ID", description = "Busca um feriado pelo ID.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Feriado encontrado", content = @Content(schema = @Schema(implementation = FeriadoResponse.class))),
         @ApiResponse(responseCode = "404", description = "Feriado não encontrado", content = @Content)
     })
     public ResponseEntity<FeriadoResponse> buscarPorId(
-            @Parameter(description = "ID do feriado", required = true)
-            @PathVariable Long id) {
-        log.info("Buscando feriado pelo ID: {}", id);
-        return service.buscarPorId(id)
+            @PathVariable LocalDate data) {
+        log.info("Buscando feriado pelo ID: {}", data);
+        return service.buscarPorId(data)
                 .map(feriado -> {
-                    log.info("Feriado encontrado: {}", feriado.id());
+                    log.info("Feriado encontrado: {}", feriado.data());
                     return ResponseEntity.ok(feriado);
                 })
                 .orElseGet(() -> {
-                    log.warn("Feriado não encontrado: {}", id);
+                    log.warn("Feriado não encontrado: {}", data);
                     return ResponseEntity.notFound().build();
                 });
     }
@@ -110,17 +111,17 @@ public class FeriadoController {
             @Parameter(description = "Novos dados do feriado", required = true)
             @Valid @RequestBody FeriadoRequest request) {
         log.info("Atualizando feriado: {}", id);
-        FeriadoResponse response = service.atualizar(id, request);
-        log.info("Feriado atualizado com sucesso: {}", response.id());
+        FeriadoResponse response = service.atualizar(request);
+        log.info("Feriado atualizado com sucesso: {}", response.data());
         return ResponseEntity.ok(response);
     }
 
     /**
      * Remove um feriado do sistema.
-     * @param id ID do feriado
+     * @param data ID do feriado
      * @return 204 No Content se removido
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{data}")
     @Operation(summary = "Deletar feriado", description = "Remove um feriado do sistema.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Feriado removido com sucesso"),
@@ -128,10 +129,10 @@ public class FeriadoController {
     })
     public ResponseEntity<Void> deletar(
             @Parameter(description = "ID do feriado", required = true)
-            @PathVariable Long id) {
-        log.info("Removendo feriado: {}", id);
-        service.deletar(id);
-        log.info("Feriado removido com sucesso: {}", id);
+            @PathVariable LocalDate data) {
+        log.info("Removendo feriado: {}", data);
+        service.deletar(data);
+        log.info("Feriado removido com sucesso: {}", data);
         return ResponseEntity.noContent().build();
     }
 } 

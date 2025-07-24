@@ -8,6 +8,5 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class FeriadoDomain {
-    private Long id;
     private LocalDate data;
 } 

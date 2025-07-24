@@ -98,4 +98,16 @@ export class UploadFormComponent {
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Relatórios');
     XLSX.writeFile(workbook, filename);
   }
+
+  pesquisarRelatorios() {
+    const ano = this.uploadForm.get('ano')?.value;
+    const mes = this.uploadForm.get('mes')?.value;
+    if (ano && mes) {
+      this.relatorioService.listarRelatorios(ano, mes).subscribe({
+        next: (res) => this.relatorios = Array.isArray(res) ? res : [res],
+        error: (err) => {/* tratar erro */}
+      });
+    }
+  }
+
 } 

@@ -25,7 +25,6 @@ public class ContratoService {
     public ContratoResponse criar(ContratoRequest request) {
         ContratoDomain domain = ContratoDomain.builder()
                 .codigoContrato(request.codigoContrato())
-                .idArea(request.idArea())
                 .build();
         ContratoDomain salvo = contratoRepository.salvar(domain);
         return toResponse(salvo);
@@ -43,7 +42,6 @@ public class ContratoService {
     public ContratoResponse atualizar(String codigoContrato, ContratoRequest request) {
         ContratoDomain domain = ContratoDomain.builder()
                 .codigoContrato(codigoContrato)
-                .idArea(request.idArea())
                 .build();
         ContratoDomain atualizado = contratoRepository.salvar(domain);
         return toResponse(atualizado);
@@ -64,8 +62,7 @@ public class ContratoService {
 
     private ContratoResponse toResponse(ContratoDomain domain) {
         return new ContratoResponse(
-                domain.getCodigoContrato(),
-                domain.getIdArea()
+                domain.getCodigoContrato()
         );
     }
 } 

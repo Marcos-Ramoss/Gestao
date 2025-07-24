@@ -1,0 +1,2064 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Relatorio de Faturamento API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Faturamento Detalhe",
+            "description": "API para gestão de detalhes de faturamento"
+        },
+        {
+            "name": "Contratos",
+            "description": "API para gestão de contratos"
+        },
+        {
+            "name": "Recursos",
+            "description": "API para gestão de recursos"
+        },
+        {
+            "name": "Faturamentos",
+            "description": "API para gestão de faturamentos"
+        },
+        {
+            "name": "Feriados",
+            "description": "API para gestão de feriados"
+        },
+        {
+            "name": "Autenticação",
+            "description": "API para autenticação e registro de usuários"
+        },
+        {
+            "name": "Áreas",
+            "description": "API para gestão de áreas do sistema"
+        },
+        {
+            "name": "Ordens de Serviço",
+            "description": "API para gestão de ordens de serviço"
+        },
+        {
+            "name": "Contrato Detalhe",
+            "description": "API para gestão de detalhes de contrato"
+        },
+        {
+            "name": "Relatórios de Atividade",
+            "description": "API para upload, listagem e exportação de relatórios de atividade"
+        }
+    ],
+    "paths": {
+        "/recursos/{id}": {
+            "get": {
+                "tags": [
+                    "Recursos"
+                ],
+                "summary": "Buscar recurso por ID",
+                "description": "Busca um recurso pelo ID.",
+                "operationId": "buscarPorId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecursoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Recursos"
+                ],
+                "summary": "Atualizar recurso",
+                "description": "Atualiza um recurso existente.",
+                "operationId": "atualizar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecursoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recurso atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecursoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Recursos"
+                ],
+                "summary": "Deletar recurso",
+                "description": "Remove um recurso do sistema.",
+                "operationId": "deletar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Recurso removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        },
+        "/ordens-servico/{id}": {
+            "get": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Buscar ordem de serviço por ID",
+                "description": "Busca uma ordem de serviço pelo ID.",
+                "operationId": "buscarPorId_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da ordem de serviço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ordem de serviço encontrada",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrdemServicoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ordem de serviço não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Atualizar ordem de serviço",
+                "description": "Atualiza uma ordem de serviço existente.",
+                "operationId": "atualizar_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da ordem de serviço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrdemServicoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Ordem de serviço não encontrada"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "200": {
+                        "description": "Ordem de serviço atualizada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrdemServicoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Deletar ordem de serviço",
+                "description": "Remove uma ordem de serviço do sistema.",
+                "operationId": "deletar_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da ordem de serviço",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ordem de serviço removida com sucesso"
+                    },
+                    "404": {
+                        "description": "Ordem de serviço não encontrada"
+                    }
+                }
+            }
+        },
+        "/feriados/{id}": {
+            "get": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Buscar feriado por ID",
+                "description": "Busca um feriado pelo ID.",
+                "operationId": "buscarPorId_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do feriado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Feriado não encontrado"
+                    },
+                    "200": {
+                        "description": "Feriado encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeriadoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Atualizar feriado",
+                "description": "Atualiza um feriado existente.",
+                "operationId": "atualizar_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do feriado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FeriadoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Feriado atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeriadoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "404": {
+                        "description": "Feriado não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Deletar feriado",
+                "description": "Remove um feriado do sistema.",
+                "operationId": "deletar_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do feriado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Feriado não encontrado"
+                    },
+                    "204": {
+                        "description": "Feriado removido com sucesso"
+                    }
+                }
+            }
+        },
+        "/faturamentos/{id}": {
+            "get": {
+                "tags": [
+                    "Faturamentos"
+                ],
+                "summary": "Buscar faturamento por ID",
+                "description": "Busca um faturamento pelo ID.",
+                "operationId": "buscarPorId_3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do faturamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Faturamento encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Faturamento não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Faturamentos"
+                ],
+                "summary": "Atualizar faturamento",
+                "description": "Atualiza um faturamento existente.",
+                "operationId": "atualizar_3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do faturamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaturamentoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Faturamento atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "404": {
+                        "description": "Faturamento não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Faturamentos"
+                ],
+                "summary": "Deletar faturamento",
+                "description": "Remove um faturamento do sistema.",
+                "operationId": "deletar_3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do faturamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Faturamento removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Faturamento não encontrado"
+                    }
+                }
+            }
+        },
+        "/faturamento-detalhes/{id}": {
+            "get": {
+                "tags": [
+                    "Faturamento Detalhe"
+                ],
+                "summary": "Buscar detalhe de faturamento por ID",
+                "description": "Busca um detalhe de faturamento pelo ID.",
+                "operationId": "buscarPorId_4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do detalhe de faturamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhe encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoDetalheResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Detalhe não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Faturamento Detalhe"
+                ],
+                "summary": "Atualizar detalhe de faturamento",
+                "description": "Atualiza um detalhe de faturamento existente.",
+                "operationId": "atualizar_4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do detalhe de faturamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaturamentoDetalheRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Detalhe não encontrado"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "200": {
+                        "description": "Detalhe atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoDetalheResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Faturamento Detalhe"
+                ],
+                "summary": "Deletar detalhe de faturamento",
+                "description": "Remove um detalhe de faturamento do sistema.",
+                "operationId": "deletar_4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do detalhe de faturamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Detalhe não encontrado"
+                    },
+                    "204": {
+                        "description": "Detalhe removido com sucesso"
+                    }
+                }
+            }
+        },
+        "/contratos/{codigoContrato}": {
+            "get": {
+                "tags": [
+                    "Contratos"
+                ],
+                "summary": "Buscar contrato por código",
+                "description": "Busca um contrato pelo código.",
+                "operationId": "buscarPorId_5",
+                "parameters": [
+                    {
+                        "name": "codigoContrato",
+                        "in": "path",
+                        "description": "Código do contrato",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contrato encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Contrato não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Contratos"
+                ],
+                "summary": "Atualizar contrato",
+                "description": "Atualiza um contrato existente.",
+                "operationId": "atualizar_5",
+                "parameters": [
+                    {
+                        "name": "codigoContrato",
+                        "in": "path",
+                        "description": "Código do contrato",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContratoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Contrato não encontrado"
+                    },
+                    "200": {
+                        "description": "Contrato atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Contratos"
+                ],
+                "summary": "Deletar contrato",
+                "description": "Remove um contrato do sistema.",
+                "operationId": "deletar_5",
+                "parameters": [
+                    {
+                        "name": "codigoContrato",
+                        "in": "path",
+                        "description": "Código do contrato",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Contrato removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Contrato não encontrado"
+                    }
+                }
+            }
+        },
+        "/contrato-detalhes/{id}": {
+            "get": {
+                "tags": [
+                    "Contrato Detalhe"
+                ],
+                "summary": "Buscar detalhe de contrato por ID",
+                "description": "Busca um detalhe de contrato pelo ID.",
+                "operationId": "buscarPorId_6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do detalhe de contrato",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Detalhe não encontrado"
+                    },
+                    "200": {
+                        "description": "Detalhe encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoDetalheResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Contrato Detalhe"
+                ],
+                "summary": "Atualizar detalhe de contrato",
+                "description": "Atualiza um detalhe de contrato existente.",
+                "operationId": "atualizar_6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do detalhe de contrato",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContratoDetalheRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Detalhe não encontrado"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "200": {
+                        "description": "Detalhe atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoDetalheResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Contrato Detalhe"
+                ],
+                "summary": "Deletar detalhe de contrato",
+                "description": "Remove um detalhe de contrato do sistema.",
+                "operationId": "deletar_6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do detalhe de contrato",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Detalhe não encontrado"
+                    },
+                    "204": {
+                        "description": "Detalhe removido com sucesso"
+                    }
+                }
+            }
+        },
+        "/auth/perfil": {
+            "get": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Obter perfil do usuário",
+                "description": "Retorna os dados do perfil do usuário autenticado.",
+                "operationId": "getPerfil",
+                "responses": {
+                    "200": {
+                        "description": "Perfil retornado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthRegisterResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Atualizar perfil do usuário",
+                "description": "Atualiza os dados do perfil do usuário autenticado.",
+                "operationId": "updatePerfil",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRegisterRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Usuário não encontrado"
+                    },
+                    "200": {
+                        "description": "Perfil atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthRegisterResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/areas/{id}": {
+            "get": {
+                "tags": [
+                    "Áreas"
+                ],
+                "summary": "Buscar área por ID",
+                "description": "Retorna uma área específica baseada no ID fornecido",
+                "operationId": "buscarPorId_7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da área a ser buscada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "404": {
+                        "description": "Área não encontrada"
+                    },
+                    "200": {
+                        "description": "Área encontrada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AreaResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Áreas"
+                ],
+                "summary": "Atualizar área",
+                "description": "Atualiza os dados de uma área existente baseada no ID fornecido",
+                "operationId": "atualizar_7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da área a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AreaRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Dados inválidos fornecidos"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "404": {
+                        "description": "Área não encontrada"
+                    },
+                    "200": {
+                        "description": "Área atualizada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AreaResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Áreas"
+                ],
+                "summary": "Deletar área",
+                "description": "Remove uma área do sistema baseada no ID fornecido",
+                "operationId": "deletar_7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da área a ser removida",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Área removida com sucesso"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "404": {
+                        "description": "Área não encontrada"
+                    }
+                }
+            }
+        },
+        "/relatorios/upload/{ano}/{mes}": {
+            "post": {
+                "tags": [
+                    "Relatórios de Atividade"
+                ],
+                "summary": "Upload de múltiplos relatórios em PDF",
+                "operationId": "uploadRelatorios",
+                "parameters": [
+                    {
+                        "name": "ano",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "mes",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "files"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "files": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Upload realizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelatorioAtividadeDomain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/recursos": {
+            "get": {
+                "tags": [
+                    "Recursos"
+                ],
+                "summary": "Listar recursos",
+                "description": "Lista todos os recursos cadastrados.",
+                "operationId": "listarTodos_1",
+                "responses": {
+                    "200": {
+                        "description": "Lista de recursos retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecursoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Recursos"
+                ],
+                "summary": "Criar recurso",
+                "description": "Cria um novo recurso no sistema.",
+                "operationId": "criar",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecursoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Recurso criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecursoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/ordens-servico": {
+            "get": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Listar ordens de serviço",
+                "description": "Lista todas as ordens de serviço cadastradas.",
+                "operationId": "listarTodos_2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de ordens de serviço retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrdemServicoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Ordens de Serviço"
+                ],
+                "summary": "Criar ordem de serviço",
+                "description": "Cria uma nova ordem de serviço no sistema.",
+                "operationId": "criar_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrdemServicoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ordem de serviço criada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrdemServicoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/feriados": {
+            "get": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Listar feriados",
+                "description": "Lista todos os feriados cadastrados.",
+                "operationId": "listarTodos_3",
+                "responses": {
+                    "200": {
+                        "description": "Lista de feriados retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeriadoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Feriados"
+                ],
+                "summary": "Criar feriado",
+                "description": "Cria um novo feriado no sistema.",
+                "operationId": "criar_2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FeriadoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "201": {
+                        "description": "Feriado criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FeriadoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/faturamentos": {
+            "get": {
+                "tags": [
+                    "Faturamentos"
+                ],
+                "summary": "Listar faturamentos",
+                "description": "Lista todos os faturamentos cadastrados.",
+                "operationId": "listarTodos_4",
+                "responses": {
+                    "200": {
+                        "description": "Lista de faturamentos retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Faturamentos"
+                ],
+                "summary": "Criar faturamento",
+                "description": "Cria um novo faturamento no sistema.",
+                "operationId": "criar_3",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaturamentoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Faturamento criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/faturamento-detalhes": {
+            "get": {
+                "tags": [
+                    "Faturamento Detalhe"
+                ],
+                "summary": "Listar detalhes de faturamento",
+                "description": "Lista todos os detalhes de faturamento cadastrados.",
+                "operationId": "listarTodos_5",
+                "responses": {
+                    "200": {
+                        "description": "Lista de detalhes retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoDetalheResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Faturamento Detalhe"
+                ],
+                "summary": "Criar detalhe de faturamento",
+                "description": "Cria um novo detalhe de faturamento no sistema.",
+                "operationId": "criar_4",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaturamentoDetalheRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Detalhe criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FaturamentoDetalheResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/contratos": {
+            "get": {
+                "tags": [
+                    "Contratos"
+                ],
+                "summary": "Listar contratos",
+                "description": "Lista todos os contratos cadastrados.",
+                "operationId": "listarTodos_6",
+                "responses": {
+                    "200": {
+                        "description": "Lista de contratos retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Contratos"
+                ],
+                "summary": "Criar contrato",
+                "description": "Cria um novo contrato no sistema.",
+                "operationId": "criar_5",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContratoRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Contrato criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/contrato-detalhes": {
+            "get": {
+                "tags": [
+                    "Contrato Detalhe"
+                ],
+                "summary": "Listar detalhes de contrato",
+                "description": "Lista todos os detalhes de contrato cadastrados.",
+                "operationId": "listarTodos_7",
+                "responses": {
+                    "200": {
+                        "description": "Lista de detalhes retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoDetalheResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Contrato Detalhe"
+                ],
+                "summary": "Criar detalhe de contrato",
+                "description": "Cria um novo detalhe de contrato no sistema.",
+                "operationId": "criar_6",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContratoDetalheRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "201": {
+                        "description": "Detalhe criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContratoDetalheResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Registrar novo usuário",
+                "description": "Registra um novo usuário no sistema.",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRegisterRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Usuário ou CPF já cadastrado"
+                    },
+                    "200": {
+                        "description": "Usuário registrado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthRegisterResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Login do usuário",
+                "description": "Autentica o usuário e retorna um token JWT.",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthLoginRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "401": {
+                        "description": "Credenciais inválidas"
+                    },
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/areas": {
+            "get": {
+                "tags": [
+                    "Áreas"
+                ],
+                "summary": "Listar todas as áreas",
+                "description": "Retorna uma lista com todas as áreas cadastradas no sistema",
+                "operationId": "listarTodos_8",
+                "responses": {
+                    "200": {
+                        "description": "Lista de áreas retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AreaResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Áreas"
+                ],
+                "summary": "Criar nova área",
+                "description": "Cria uma nova área no sistema com os dados fornecidos",
+                "operationId": "criar_7",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AreaRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Área criada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AreaResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos fornecidos"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            }
+        },
+        "/relatorios/{ano}/{mes}": {
+            "get": {
+                "tags": [
+                    "Relatórios de Atividade"
+                ],
+                "summary": "Lista todos os relatórios de atividade",
+                "operationId": "listarTodos",
+                "parameters": [
+                    {
+                        "name": "ano",
+                        "in": "path",
+                        "description": "Ano dos relatórios",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "mes",
+                        "in": "path",
+                        "description": "Mês dos relatórios",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de relatórios retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelatorioAtividadeDomain"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/relatorios/exportar/{ano}/{mes}": {
+            "get": {
+                "tags": [
+                    "Relatórios de Atividade"
+                ],
+                "summary": "Exportar relatórios de atividade para Excel",
+                "operationId": "exportarRelatorios",
+                "parameters": [
+                    {
+                        "name": "ano",
+                        "in": "path",
+                        "description": "Ano dos relatórios",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "mes",
+                        "in": "path",
+                        "description": "Mês dos relatórios",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Erro ao gerar o arquivo"
+                    },
+                    "200": {
+                        "description": "Arquivo Excel gerado com sucesso"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RecursoRequest": {
+                "type": "object",
+                "properties": {
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "fatorAjuste": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "description": "Dados do recurso"
+            },
+            "RecursoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "fatorAjuste": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "OrdemServicoRequest": {
+                "type": "object",
+                "properties": {
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "numeroOs": {
+                        "type": "string"
+                    }
+                },
+                "description": "Dados da ordem de serviço"
+            },
+            "OrdemServicoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "numeroOs": {
+                        "type": "string"
+                    }
+                }
+            },
+            "FeriadoRequest": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "description": "Dados do feriado"
+            },
+            "FeriadoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "data": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                }
+            },
+            "FaturamentoRequest": {
+                "type": "object",
+                "properties": {
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "objetivo": {
+                        "type": "string"
+                    },
+                    "valor": {
+                        "type": "number"
+                    },
+                    "numeroMedicao": {
+                        "type": "string"
+                    }
+                },
+                "description": "Dados do faturamento"
+            },
+            "FaturamentoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "objetivo": {
+                        "type": "string"
+                    },
+                    "valor": {
+                        "type": "number"
+                    },
+                    "numeroMedicao": {
+                        "type": "string"
+                    }
+                }
+            },
+            "FaturamentoDetalheRequest": {
+                "type": "object",
+                "properties": {
+                    "idFaturamento": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    }
+                },
+                "description": "Dados do detalhe de faturamento"
+            },
+            "FaturamentoDetalheResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "idFaturamento": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ContratoRequest": {
+                "type": "object",
+                "properties": {
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "idArea": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "description": "Dados do contrato"
+            },
+            "ContratoResponse": {
+                "type": "object",
+                "properties": {
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "idArea": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "ContratoDetalheRequest": {
+                "type": "object",
+                "properties": {
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "preposto": {
+                        "type": "string"
+                    },
+                    "fiscal": {
+                        "type": "string"
+                    },
+                    "gestor": {
+                        "type": "string"
+                    },
+                    "objeto": {
+                        "type": "string"
+                    },
+                    "processoSei": {
+                        "type": "string"
+                    }
+                },
+                "description": "Dados do detalhe de contrato"
+            },
+            "ContratoDetalheResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "preposto": {
+                        "type": "string"
+                    },
+                    "fiscal": {
+                        "type": "string"
+                    },
+                    "gestor": {
+                        "type": "string"
+                    },
+                    "objeto": {
+                        "type": "string"
+                    },
+                    "processoSei": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AuthRegisterRequest": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    }
+                },
+                "description": "Dados de registro"
+            },
+            "AuthRegisterResponse": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    }
+                }
+            },
+            "AreaRequest": {
+                "required": [
+                    "nome"
+                ],
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "maxLength": 255,
+                        "minLength": 2,
+                        "type": "string",
+                        "description": "Nome da área",
+                        "example": "Tecnologia da Informação"
+                    }
+                },
+                "description": "Dados da área a ser criada"
+            },
+            "AreaResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID único da área",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "nome": {
+                        "type": "string",
+                        "description": "Nome da área",
+                        "example": "Tecnologia da Informação"
+                    }
+                },
+                "description": "Dados de resposta de área"
+            },
+            "RecursoDomain": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "codigoContrato": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "fatorAjuste": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "RelatorioAtividadeDomain": {
+                "type": "object",
+                "properties": {
+                    "cliente": {
+                        "type": "string"
+                    },
+                    "ano": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "mes": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "recurso": {
+                        "$ref": "#/components/schemas/RecursoDomain"
+                    },
+                    "nomeProjeto": {
+                        "type": "string"
+                    },
+                    "horaTotalProjeto": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "AuthLoginRequest": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "description": "Dados de login"
+            },
+            "AuthResponse": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
