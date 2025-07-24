@@ -14,15 +14,21 @@ import lombok.AllArgsConstructor;
 
 @Repository
 @AllArgsConstructor
+
 public class AreaRepositoryImpl implements AreaRepository {
 
     private final AreaEntityRepository jpaRepository;
+    private final ContratoEntityRepository contratoRepository;
 
     @Override
     public AreaDomain salvar(AreaDomain area) {
         AreaEntity entity = new AreaEntity();
         entity.setId(area.getId());
         entity.setNome(area.getNome());
+        if (area.getCodigoContrato() != null) {
+            contratoRepository.findById(area.getCodigoContrato())
+                .ifPresent(entity::setContrato);
+        }
         entity = jpaRepository.save(entity);
         return toDomain(entity);
     }
@@ -46,6 +52,7 @@ public class AreaRepositoryImpl implements AreaRepository {
         return AreaDomain.builder()
                 .id(entity.getId())
                 .nome(entity.getNome())
+                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigo() : null)
                 .build();
     }
 } 

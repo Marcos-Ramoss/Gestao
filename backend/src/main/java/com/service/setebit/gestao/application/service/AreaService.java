@@ -33,31 +33,36 @@ public class AreaService {
      * @throws IllegalArgumentException se os dados forem inválidos
      */
     public AreaResponse criar(AreaRequest request) {
-        log.info("Iniciando criação de área: {}", request.nome());
-        
+        log.info("Iniciando criação de área: {} | Contrato: {}", request.nome(), request.codigoContrato());
+
         // Validação adicional de negócio
         if (request.nome() == null || request.nome().trim().isEmpty()) {
             log.error("Tentativa de criar área com nome vazio");
             throw new IllegalArgumentException("Nome da área não pode ser vazio");
         }
-        
+        if (request.codigoContrato() == null || request.codigoContrato().trim().isEmpty()) {
+            log.error("Tentativa de criar área sem código do contrato");
+            throw new IllegalArgumentException("Código do contrato é obrigatório");
+        }
+
         // Verifica se já existe uma área com o mesmo nome
         Optional<AreaDomain> areaExistente = areaRepository.listarTodos().stream()
                 .filter(area -> area.getNome().equalsIgnoreCase(request.nome().trim()))
                 .findFirst();
-        
+
         if (areaExistente.isPresent()) {
             log.warn("Tentativa de criar área com nome duplicado: {}", request.nome());
             throw new IllegalArgumentException("Já existe uma área com o nome: " + request.nome());
         }
-        
+
         AreaDomain domain = AreaDomain.builder()
                 .nome(request.nome().trim())
+                .codigoContrato(request.codigoContrato().trim())
                 .build();
-        
+
         AreaDomain salvo = areaRepository.salvar(domain);
-        log.info("Área criada com sucesso. ID: {}, Nome: {}", salvo.getId(), salvo.getNome());
-        
+        log.info("Área criada com sucesso. ID: {}, Nome: {}, Contrato: {}", salvo.getId(), salvo.getNome(), salvo.getCodigoContrato());
+
         return toResponse(salvo);
     }
 
@@ -141,14 +146,20 @@ public class AreaService {
             throw new IllegalArgumentException("Já existe outra área com o nome: " + request.nome());
         }
         
+        if (request.codigoContrato() == null || request.codigoContrato().trim().isEmpty()) {
+            log.error("Tentativa de atualizar área sem código do contrato. ID: {}", id);
+            throw new IllegalArgumentException("Código do contrato é obrigatório");
+        }
+
         AreaDomain domain = AreaDomain.builder()
                 .id(id)
                 .nome(request.nome().trim())
+                .codigoContrato(request.codigoContrato().trim())
                 .build();
-        
+
         AreaDomain atualizado = areaRepository.salvar(domain);
-        log.info("Área atualizada com sucesso. ID: {}, Nome: {}", id, atualizado.getNome());
-        
+        log.info("Área atualizada com sucesso. ID: {}, Nome: {}, Contrato: {}", id, atualizado.getNome(), atualizado.getCodigoContrato());
+
         return toResponse(atualizado);
     }
 
@@ -189,7 +200,8 @@ public class AreaService {
     private AreaResponse toResponse(AreaDomain domain) {
         return new AreaResponse(
                 domain.getId(),
-                domain.getNome()
+                domain.getNome(),
+                domain.getCodigoContrato()
         );
     }
 } 

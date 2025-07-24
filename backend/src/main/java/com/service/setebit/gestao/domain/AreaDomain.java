@@ -9,4 +9,5 @@ import lombok.*;
 public class AreaDomain {
     private Long id;
     private String nome;
-} 
+    private String codigoContrato;
+}

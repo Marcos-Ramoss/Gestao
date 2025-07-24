@@ -12,5 +12,9 @@ public record AreaRequest(
     @Schema(description = "Nome da área", example = "Tecnologia da Informação")
     @NotBlank(message = "O nome da área é obrigatório")
     @Size(min = 2, max = 255, message = "O nome da área deve ter entre 2 e 255 caracteres")
-    String nome
-) {} 
+    String nome,
+
+    @Schema(description = "Código do contrato relacionado à área", example = "CT-2025-001")
+    @NotBlank(message = "O código do contrato é obrigatório")
+    String codigoContrato
+) {}

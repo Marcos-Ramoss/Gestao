@@ -68,4 +68,9 @@ export class RelatorioAtividadeComponent {
     }
   }
 
+
+  exportarExcel() {
+    // TODO: Implementar exportação para Excel
+    this.messageService.add({severity:'info', summary:'Exportação', detail:'Funcionalidade de exportação ainda não implementada.'});
+  }
 }
