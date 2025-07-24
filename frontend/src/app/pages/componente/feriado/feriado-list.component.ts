@@ -6,19 +6,27 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { FeriadoFormComponent } from './feriado-form.component';
 
 @Component({
   selector: 'app-feriado-list',
   standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule, NgIf],
+  imports: [CommonModule, TableModule, ButtonModule, NgIf, DialogModule, ToastModule, FeriadoFormComponent],
+  providers: [MessageService],
   templateUrl: './feriado-list.component.html'
 })
 export class FeriadoListComponent implements OnInit {
   feriados: FeriadoResponseDto[] = [];
   carregando: boolean = true;
   erro: string | null = null;
+  feriadoSelecionado: FeriadoResponseDto | null = null;
+  exibirModalEdicao = false;
+  exibirModalExclusao = false;
 
-  constructor(private feriadoService: FeriadoService, private router: Router) {}
+  constructor(private feriadoService: FeriadoService, private router: Router, private messageService: MessageService) {}
 
   ngOnInit() {
     this.carregarFeriados();
@@ -39,14 +47,48 @@ export class FeriadoListComponent implements OnInit {
   }
 
   editarFeriado(id: number) {
-    // Modal de edição será implementado depois
+    const feriado = this.feriados.find(f => f.id === id);
+    if (feriado) {
+      this.feriadoSelecionado = { ...feriado };
+      this.exibirModalEdicao = true;
+    }
+  }
+
+  aoSalvarEdicao() {
+    this.exibirModalEdicao = false;
+    this.feriadoSelecionado = null;
+    this.carregarFeriados();
   }
 
   deletarFeriado(id: number) {
-    // Modal de confirmação será implementado depois
+    const feriado = this.feriados.find(f => f.id === id);
+    if (feriado) {
+      this.feriadoSelecionado = feriado;
+      this.exibirModalExclusao = true;
+    }
+  }
+
+  confirmarExclusao() {
+    if (!this.feriadoSelecionado) return;
+    this.feriadoService.deletarFeriado(this.feriadoSelecionado.id).subscribe({
+      next: () => {
+        this.messageService.add({severity:'success', summary:'Sucesso', detail:'Feriado excluído com sucesso!'});
+        this.carregarFeriados();
+        this.exibirModalExclusao = false;
+        this.feriadoSelecionado = null;
+      },
+      error: () => {
+        this.messageService.add({severity:'error', summary:'Erro', detail:'Erro ao excluir feriado.'});
+      }
+    });
+  }
+
+  cancelarExclusao() {
+    this.exibirModalExclusao = false;
+    this.feriadoSelecionado = null;
   }
 
   novoFeriado() {
     this.router.navigate(['/app/feriados/novo']);
   }
-} 
+}

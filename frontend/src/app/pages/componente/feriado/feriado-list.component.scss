@@ -1,0 +1,16 @@
+/* Estilos básicos para a listagem de feriados */
+:host ::ng-deep .p-toolbar {
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep .p-table {
+  margin-top: 1rem;
+}
+
+:host ::ng-deep .p-dialog .p-d-flex {
+  align-items: center;
+}
+
+:host ::ng-deep .p-dialog .pi-exclamation-triangle {
+  margin-right: 0.5rem;
+}
