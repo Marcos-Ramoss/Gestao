@@ -6,17 +6,16 @@
       <label for="data" class="block text-base font-medium text-gray-700 mb-1">Data</label>
       <p-calendar
         id="data"
+        formControlName="data"
         [showIcon]="true"
         [dateFormat]="'dd/mm/yy'"
-        [(ngModel)]="dataSelecionada"
-        (onSelect)="onCalendarChange($event)"
         [readonlyInput]="carregando"
         [showButtonBar]="true"
         [touchUI]="true"
         [panelStyle]="{ minWidth: '16rem' }"
         [placeholder]="'DD/MM/AAAA'"
         [inputStyleClass]="'w-full text-lg py-2'"
-        [ngModelOptions]="{standalone: true}"
+        appendTo="body"
       ></p-calendar>
       <div *ngIf="feriadoForm.get('data')?.errors?.['formato'] && feriadoForm.get('data')?.touched" class="text-xs text-red-500 mt-1">Formato deve ser DD/MM/AAAA</div>
       <div *ngIf="feriadoForm.get('data')?.errors?.['invalida'] && feriadoForm.get('data')?.touched" class="text-xs text-red-500 mt-1">Data inválida</div>

@@ -1,0 +1,13 @@
+/* Centraliza o popup do calendário do PrimeNG quando usado com appendTo="body" */
+.p-datepicker {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+/* Estilos básicos para o formulário de feriado */
+:host ::ng-deep .p-field {
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep .p-d-flex {
+  margin-top: 1rem;
+}
