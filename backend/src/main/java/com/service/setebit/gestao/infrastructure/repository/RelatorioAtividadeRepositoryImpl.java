@@ -2,15 +2,16 @@ package com.service.setebit.gestao.infrastructure.repository;
 
 import com.service.setebit.gestao.domain.RelatorioAtividadeDomain;
 import com.service.setebit.gestao.domain.repository.RelatorioAtividadeRepository;
-import com.service.setebit.gestao.infrastructure.entity.RecursoEntity;
 import com.service.setebit.gestao.infrastructure.entity.RelatorioAtividadeEntity;
+import com.service.setebit.gestao.infrastructure.mapper.RelatorioAtividadeMapper;
 
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,34 +21,20 @@ public class RelatorioAtividadeRepositoryImpl implements RelatorioAtividadeRepos
 
     @Override
     public RelatorioAtividadeDomain salvar(RelatorioAtividadeDomain relatorio) {
-        RelatorioAtividadeEntity entity = RelatorioAtividadeEntity.builder()
-                .cliente(relatorio.getCliente())
-                .ano(relatorio.getAno())
-                .mes(relatorio.getMes())
-                .recurso(RecursoEntity.builder().id(relatorio.getRecurso().getId()).build())
-                .nomeProjeto(relatorio.getNomeProjeto())
-                .horaTotalProjeto(relatorio.getHoraTotalProjeto())
-                .build();
+
+        RelatorioAtividadeEntity entity = RelatorioAtividadeMapper.toEntity(relatorio);
         entity = jpaRepository.save(entity);
-        // Retorna o domain preenchido (pode incluir o id se desejar)
         return relatorio;
     }
 
     @Override
     public List<RelatorioAtividadeDomain> listarTodos() {
-        return jpaRepository.findAll().stream()
+        return jpaRepository.findAll().stream().toList().stream()
             .map(this::toDomain)
-            .collect(Collectors.toList());
+            .collect(toList());
     }
 
     private RelatorioAtividadeDomain toDomain(RelatorioAtividadeEntity entity) {
-        return RelatorioAtividadeDomain.builder()
-                .cliente(entity.getCliente())
-                .ano(entity.getAno())
-                .mes(entity.getMes())
-                //.colaborador(entity.getColaborador())
-                .nomeProjeto(entity.getNomeProjeto())
-                .horaTotalProjeto(entity.getHoraTotalProjeto())
-                .build();
+        return RelatorioAtividadeMapper.toDomain(entity);
     }
 } 

@@ -2,7 +2,6 @@ package com.service.setebit.gestao.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.List;
 
 @Entity
 @Table(name = "area")
@@ -19,6 +18,8 @@ public class AreaEntity {
     @Column(name = "nome", nullable = false, length = 60)
     private String nome;
 
-    @OneToMany(mappedBy = "area")
-    private List<ContratoEntity> contratos;
-} 
+    @ManyToOne
+    @JoinColumn(name = "codigo_contrato")
+    private ContratoEntity contrato;
+
+}

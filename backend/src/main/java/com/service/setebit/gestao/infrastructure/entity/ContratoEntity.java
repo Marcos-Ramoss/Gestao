@@ -15,10 +15,6 @@ public class ContratoEntity {
     @Column(name = "codigo_contrato")
     private String codigo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_area")
-    private AreaEntity area;
-
     @OneToMany(mappedBy = "contrato")
     private List<OrdemServicoEntity> ordensServico;
 

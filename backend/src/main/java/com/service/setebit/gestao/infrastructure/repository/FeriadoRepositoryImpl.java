@@ -4,6 +4,8 @@ import com.service.setebit.gestao.domain.FeriadoDomain;
 import com.service.setebit.gestao.domain.repository.FeriadoRepository;
 import com.service.setebit.gestao.infrastructure.entity.FeriadoEntity;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,15 +21,14 @@ public class FeriadoRepositoryImpl implements FeriadoRepository {
     @Override
     public FeriadoDomain salvar(FeriadoDomain feriado) {
         FeriadoEntity entity = new FeriadoEntity();
-        entity.setId(feriado.getId());
         entity.setData(feriado.getData());
         entity = jpaRepository.save(entity);
         return toDomain(entity);
     }
 
     @Override
-    public Optional<FeriadoDomain> buscarPorId(Long id) {
-        return jpaRepository.findById(id).map(this::toDomain);
+    public Optional<FeriadoDomain> findByData(LocalDate data) {
+        return jpaRepository.findByData(data).map(this::toDomain);
     }
 
     @Override
@@ -36,13 +37,12 @@ public class FeriadoRepositoryImpl implements FeriadoRepository {
     }
 
     @Override
-    public void deletarPorId(Long id) {
-        jpaRepository.deleteById(id);
+    public void deletarByData(LocalDate data) {
+        jpaRepository.deleteByData(data);
     }
 
     private FeriadoDomain toDomain(FeriadoEntity entity) {
         return FeriadoDomain.builder()
-                .id(entity.getId())
                 .data(entity.getData())
                 .build();
     }

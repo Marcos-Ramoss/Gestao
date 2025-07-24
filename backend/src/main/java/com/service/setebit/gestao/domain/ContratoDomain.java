@@ -8,5 +8,4 @@ import lombok.*;
 @Builder
 public class ContratoDomain {
     private String codigoContrato;
-    private Long idArea;
-} 
+}
