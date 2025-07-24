@@ -9,14 +9,12 @@
     <ng-template pTemplate="header">
       <tr>
         <th>Código</th>
-        <th>ID Área</th>
         <th>Ações</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-contrato>
       <tr>
         <td>{{ contrato.codigoContrato }}</td>
-        <td>{{ contrato.idArea }}</td>
         <td>
           <button pButton icon="pi pi-eye" class="p-button-text p-button-sm" (click)="detalharContrato(contrato)" pTooltip="Detalhar"></button>
           <button pButton icon="pi pi-plus" class="p-button-text p-button-sm text-green-600" (click)="abrirNovoDetalhe(contrato)" pTooltip="Adicionar Detalhe"></button>

@@ -1,74 +1,57 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ContratoService } from '../../../services/contrato.service';
 import { ContratoRequestDto } from '../../../dto/contrato-request.dto';
 import { ContratoResponseDto } from '../../../dto/contrato-response.dto';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { NgIf } from '@angular/common';
-import { AreaService } from '../../../services/area.service';
-import { AreaResponseDto } from '../../../dto/area-response.dto';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contrato-form',
   templateUrl: './contrato-form.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, DropdownModule, ToastModule, NgIf, CommonModule],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, ToastModule, NgIf, CommonModule],
   providers: [MessageService]
 })
-export class ContratoFormComponent implements OnChanges, OnInit {
+export class ContratoFormComponent implements OnInit {
   @Input() contrato: ContratoResponseDto | null = null;
   @Output() fechar = new EventEmitter<boolean>();
   form: FormGroup;
   loading = false;
   erro: string | null = null;
-  areas: AreaResponseDto[] = [];
 
   constructor(
     private fb: FormBuilder, 
     private contratoService: ContratoService, 
-    private areaService: AreaService,
     private messageService: MessageService
   ) {
     this.form = this.fb.group({
-      codigoContrato: ['', Validators.required],
-      idArea: ['', Validators.required]
+      codigoContrato: ['', Validators.required]
     });
   }
 
   ngOnInit() {
-    this.carregarAreas();
+    this.atualizarForm();
   }
 
-  carregarAreas() {
-    this.areaService.listarAreas().subscribe({
-      next: (dados) => {
-        this.areas = dados;
-        console.log('Áreas carregadas:', dados);
-      },
-      error: (erro) => {
-        console.error('Erro ao carregar áreas:', erro);
-        this.areas = [];
-      }
-    });
+  ngOnChanges() {
+    this.atualizarForm();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['contrato']) {
-      if (this.contrato) {
-        this.form.patchValue(this.contrato);
-        this.form.get('codigoContrato')?.disable();
-      } else {
-        this.form.reset();
-        this.form.get('codigoContrato')?.enable();
-      }
-      this.erro = null;
-      this.loading = false;
+  private atualizarForm() {
+    if (this.contrato) {
+      this.form.patchValue({ codigoContrato: this.contrato.codigoContrato });
+      this.form.get('codigoContrato')?.enable();
+    } else {
+      this.form.reset();
+      this.form.get('codigoContrato')?.enable();
     }
+    this.erro = null;
+    this.loading = false;
   }
 
   salvar() {
@@ -76,14 +59,13 @@ export class ContratoFormComponent implements OnChanges, OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    
     this.loading = true;
     this.erro = null;
     const dto: ContratoRequestDto = {
-      codigoContrato: this.form.getRawValue().codigoContrato,
-      idArea: +this.form.get('idArea')?.value
+      codigoContrato: this.form.getRawValue().codigoContrato
     };
     if (this.contrato) {
+      // Atualiza usando o valor antigo como chave, mas envia o novo valor
       this.contratoService.atualizarContrato(this.contrato.codigoContrato, dto).subscribe({
         next: () => {
           this.messageService.add({
@@ -92,7 +74,6 @@ export class ContratoFormComponent implements OnChanges, OnInit {
             detail: 'Contrato atualizado com sucesso!'
           });
           this.loading = false;
-          // Pequeno delay para mostrar a mensagem antes de fechar o modal
           setTimeout(() => {
             this.fechar.emit(true);
           }, 1000);
@@ -116,7 +97,6 @@ export class ContratoFormComponent implements OnChanges, OnInit {
             detail: 'Contrato criado com sucesso!'
           });
           this.loading = false;
-          // Pequeno delay para mostrar a mensagem antes de fechar o modal
           setTimeout(() => {
             this.fechar.emit(true);
           }, 1000);

@@ -58,7 +58,10 @@ export class ContratoListComponent implements OnInit {
   fecharForm(atualizar: boolean) {
     this.displayForm = false;
     this.contratoSelecionado = null;
-    if (atualizar) this.carregarContratos();
+    if (atualizar) {
+      // Atualiza a lista local removendo o antigo e inserindo o novo, para refletir alteração de código
+      this.carregarContratos();
+    }
   }
 
   pedirConfirmacaoExclusao(contrato: ContratoResponseDto) {
