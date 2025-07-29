@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.service.setebit.gestao.infrastructure.entity.AreaEntity;
 import org.springframework.stereotype.Repository;
 import com.service.setebit.gestao.domain.OrdemServicoDomain;
 import com.service.setebit.gestao.domain.repository.OrdemServicoRepository;
@@ -16,15 +17,15 @@ import lombok.AllArgsConstructor;
 public class OrdemServicoRepositoryImpl implements OrdemServicoRepository {
 
     private final OrdemServicoEntityRepository jpaRepository;
-    private final ContratoEntityRepository contratoRepository;
+    private final AreaEntityRepository areaEntityRepository;
 
     @Override
     public OrdemServicoDomain salvar(OrdemServicoDomain ordemServico) {
-        ContratoEntity contrato = contratoRepository.findById(ordemServico.getCodigoContrato())
+        AreaEntity area = areaEntityRepository.findById(ordemServico.getAreaId())
                 .orElseThrow(() -> new IllegalArgumentException("Contrato não encontrado"));
         OrdemServicoEntity entity = new OrdemServicoEntity();
         entity.setId(ordemServico.getId());
-        entity.setContrato(contrato);
+        entity.setArea(area);
         entity.setNumeroOs(ordemServico.getNumeroOs());
         entity = jpaRepository.save(entity);
         return toDomain(entity);
@@ -48,7 +49,7 @@ public class OrdemServicoRepositoryImpl implements OrdemServicoRepository {
     private OrdemServicoDomain toDomain(OrdemServicoEntity entity) {
         return OrdemServicoDomain.builder()
                 .id(entity.getId())
-                .codigoContrato(entity.getContrato() != null ? entity.getContrato().getCodigo() : null)
+                .areaId(entity.getArea() != null ? entity.getArea().getId() : null)
                 .numeroOs(entity.getNumeroOs())
                 .build();
     }

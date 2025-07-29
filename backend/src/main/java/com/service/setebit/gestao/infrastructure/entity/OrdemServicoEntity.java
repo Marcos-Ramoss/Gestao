@@ -16,8 +16,8 @@ public class OrdemServicoEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_contrato")
-    private ContratoEntity contrato;
+    @JoinColumn(name = "id_area")
+    private AreaEntity area;
 
     @Column(name = "NUMERO_OS", nullable = false, length = 20)
     private String numeroOs;

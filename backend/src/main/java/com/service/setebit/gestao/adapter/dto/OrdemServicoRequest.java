@@ -1,6 +1,6 @@
 package com.service.setebit.gestao.adapter.dto;
 
 public record OrdemServicoRequest(
-    String codigoContrato,
+    Long areaId,
     String numeroOs
 ) {} 

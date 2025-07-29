@@ -16,9 +16,6 @@ public class ContratoEntity {
     private String codigo;
 
     @OneToMany(mappedBy = "contrato")
-    private List<OrdemServicoEntity> ordensServico;
-
-    @OneToMany(mappedBy = "contrato")
     private List<RecursoEntity> recursos;
 
     @OneToMany(mappedBy = "contrato")

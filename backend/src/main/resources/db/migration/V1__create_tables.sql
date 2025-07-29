@@ -75,11 +75,11 @@ CREATE TABLE `faturamento_detalhe` (
 -- gestao.ordem_servico definição
 CREATE TABLE `ordem_servico` (
   `id_ordem_servico` bigint NOT NULL AUTO_INCREMENT,
-  `codigo_contrato` varchar(100) DEFAULT NULL,
+  `id_area` bigint NOT NULL,
   `numero_os` varchar(20) NOT NULL,
   PRIMARY KEY (`id_ordem_servico`),
-  KEY `idx_codigo_contrato` (`codigo_contrato`),
-  CONSTRAINT `fk_ordem_servico_contrato` FOREIGN KEY (`codigo_contrato`) REFERENCES `contrato` (`codigo_contrato`)
+  KEY `idx_codigo_contrato` (`id_area`),
+  CONSTRAINT `fk_ordem_servico_area` FOREIGN KEY (`id_area`) REFERENCES `area` (`id_area`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- gestao.recurso definição

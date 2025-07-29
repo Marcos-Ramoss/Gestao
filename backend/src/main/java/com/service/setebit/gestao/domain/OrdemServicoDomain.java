@@ -8,6 +8,6 @@ import lombok.*;
 @Builder
 public class OrdemServicoDomain {
     private Long id;
-    private String codigoContrato;
+    private Long areaId;
     private String numeroOs;
 } 
