@@ -19,7 +19,7 @@ public class OrdemServicoService {
 
     public OrdemServicoResponse criar(OrdemServicoRequest request) {
         OrdemServicoDomain domain = OrdemServicoDomain.builder()
-                .codigoContrato(request.codigoContrato())
+                .areaId(request.areaId())
                 .numeroOs(request.numeroOs())
                 .build();
         OrdemServicoDomain salvo = repository.salvar(domain);
@@ -37,7 +37,7 @@ public class OrdemServicoService {
     public OrdemServicoResponse atualizar(Long id, OrdemServicoRequest request) {
         OrdemServicoDomain domain = OrdemServicoDomain.builder()
                 .id(id)
-                .codigoContrato(request.codigoContrato())
+                .areaId(request.areaId())
                 .numeroOs(request.numeroOs())
                 .build();
         OrdemServicoDomain atualizado = repository.salvar(domain);
@@ -51,7 +51,7 @@ public class OrdemServicoService {
     private OrdemServicoResponse toResponse(OrdemServicoDomain domain) {
         return new OrdemServicoResponse(
                 domain.getId(),
-                domain.getCodigoContrato(),
+                domain.getAreaId(),
                 domain.getNumeroOs()
         );
     }
