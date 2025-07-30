@@ -37,7 +37,7 @@ export class AreaFormComponent implements OnInit, OnChanges {
     public router: Router
   ) {
     this.areaForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.maxLength(100)]],
+      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       codigoContrato: ['', [Validators.required]]
     });
   }

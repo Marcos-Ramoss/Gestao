@@ -10,6 +10,12 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { OrdemServicoFormComponent } from './ordem-servico-form.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { AreaService } from '../../../services/area.service';
+import { AreaResponseDto } from '../../../dto/area-response.dto';
+
+interface OrdemServicoComArea extends OrdemServicoResponseDto {
+  area?: AreaResponseDto;
+}
 
 @Component({
   selector: 'app-ordem-servico-list',
@@ -19,7 +25,7 @@ import { TooltipModule } from 'primeng/tooltip';
   templateUrl: './ordem-servico-list.component.html',
 })
 export class OrdemServicoListComponent implements OnInit {
-  ordensServico: OrdemServicoResponseDto[] = [];
+  ordensServico: OrdemServicoComArea[] = [];
   carregando: boolean = true;
   erro: string | null = null;
   ordemServicoSelecionada: OrdemServicoResponseDto | null = null;
@@ -30,6 +36,7 @@ export class OrdemServicoListComponent implements OnInit {
 
   constructor(
     private ordemServicoService: OrdemServicoService,
+    private areaService: AreaService,
     private messageService: MessageService
   ) {}
 
@@ -42,12 +49,27 @@ export class OrdemServicoListComponent implements OnInit {
     this.ordemServicoService.listarOrdensServico().subscribe({
       next: (dados) => {
         this.ordensServico = dados;
+        this.carregarInformacoesAreas();
         this.carregando = false;
       },
       error: () => {
         this.erro = 'Erro ao carregar ordens de serviço.';
         this.carregando = false;
       }
+    });
+  }
+
+  carregarInformacoesAreas() {
+    // Buscar informações das áreas para cada ordem de serviço
+    this.ordensServico.forEach(ordemServico => {
+      this.areaService.buscarAreaPorId(ordemServico.areaId).subscribe({
+        next: (area) => {
+          ordemServico.area = area;
+        },
+        error: () => {
+          // Se não conseguir carregar a área, mantém apenas o ID
+        }
+      });
     });
   }
 

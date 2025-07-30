@@ -7,20 +7,20 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="field">
-      <label for="codigoContrato" class="block text-sm font-medium text-gray-700 mb-2">
-        Código do Contrato *
+      <label for="areaId" class="block text-sm font-medium text-gray-700 mb-2">
+        Área *
       </label>
       <p-dropdown
-        id="codigoContrato"
-        name="codigoContrato"
-        [(ngModel)]="formData.codigoContrato"
-        [options]="contratos"
-        optionLabel="codigoContrato"
-        optionValue="codigoContrato"
-        placeholder="Selecione um contrato"
+        id="areaId"
+        name="areaId"
+        [(ngModel)]="formData.areaId"
+        [options]="areas"
+        optionLabel="nome"
+        optionValue="id"
+        placeholder="Selecione uma área"
         class="w-full"
         (onChange)="limparErro()"
-        [class.ng-invalid]="!formData.codigoContrato && form.submitted">
+        [class.ng-invalid]="!formData.areaId && form.submitted">
       </p-dropdown>
     </div>
 

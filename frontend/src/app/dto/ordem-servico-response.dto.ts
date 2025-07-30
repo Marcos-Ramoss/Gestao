@@ -1,5 +1,5 @@
 export interface OrdemServicoResponseDto {
   id: number;
-  codigoContrato: string;
+  areaId: number;
   numeroOs: string;
 } 

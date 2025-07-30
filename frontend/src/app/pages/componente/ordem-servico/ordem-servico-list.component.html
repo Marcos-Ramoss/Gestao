@@ -34,7 +34,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th>ID</th>
-        <th>Código do Contrato</th>
+        <th>Área</th>
         <th>Número da OS</th>
         <th>Ações</th>
       </tr>
@@ -43,7 +43,7 @@
     <ng-template pTemplate="body" let-ordemServico>
       <tr>
         <td>{{ ordemServico.id }}</td>
-        <td>{{ ordemServico.codigoContrato }}</td>
+        <td>{{ ordemServico.area?.nome || 'Área ' + ordemServico.areaId }}</td>
         <td>{{ ordemServico.numeroOs }}</td>
         <td>
           <div class="flex gap-2">

@@ -9,8 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { ContratoService } from '../../../services/contrato.service';
-import { ContratoResponseDto } from '../../../dto/contrato-response.dto';
+import { AreaService } from '../../../services/area.service';
+import { AreaResponseDto } from '../../../dto/area-response.dto';
 
 @Component({
   selector: 'app-ordem-servico-form',
@@ -25,33 +25,33 @@ export class OrdemServicoFormComponent implements OnInit {
   @Output() cancelado = new EventEmitter<void>();
 
   formData: OrdemServicoRequestDto = {
-    codigoContrato: '',
+    areaId: 0,
     numeroOs: ''
   };
 
-  contratos: ContratoResponseDto[] = [];
+  areas: AreaResponseDto[] = [];
   carregando: boolean = false;
   erro: string | null = null;
   editando: boolean = false;
 
   constructor(
     private ordemServicoService: OrdemServicoService,
-    private contratoService: ContratoService,
+    private areaService: AreaService,
     private messageService: MessageService
   ) {}
 
   ngOnInit() {
-    this.carregarContratos();
+    this.carregarAreas();
     this.inicializarFormulario();
   }
 
-  carregarContratos() {
-    this.contratoService.listarContratos().subscribe({
-      next: (contratos) => {
-        this.contratos = contratos;
+  carregarAreas() {
+    this.areaService.listarAreas().subscribe({
+      next: (areas) => {
+        this.areas = areas;
       },
       error: () => {
-        this.erro = 'Erro ao carregar contratos.';
+        this.erro = 'Erro ao carregar áreas.';
       }
     });
   }
@@ -60,7 +60,7 @@ export class OrdemServicoFormComponent implements OnInit {
     if (this.ordemServico) {
       this.editando = true;
       this.formData = {
-        codigoContrato: this.ordemServico.codigoContrato,
+        areaId: this.ordemServico.areaId,
         numeroOs: this.ordemServico.numeroOs
       };
     }
@@ -114,8 +114,8 @@ export class OrdemServicoFormComponent implements OnInit {
   }
 
   validarFormulario(): boolean {
-    if (!this.formData.codigoContrato?.trim()) {
-      this.erro = 'Código do contrato é obrigatório.';
+    if (!this.formData.areaId) {
+      this.erro = 'Área é obrigatória.';
       return false;
     }
 

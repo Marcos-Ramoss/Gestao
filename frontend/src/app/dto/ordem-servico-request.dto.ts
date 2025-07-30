@@ -1,4 +1,4 @@
 export interface OrdemServicoRequestDto {
-  codigoContrato: string;
+  areaId: number;
   numeroOs: string;
 } 
