@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="h-full w-full bg-white rounded-2xl shadow-lg p-12 flex flex-col">
   <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="w-full flex flex-col gap-8 flex-1">
-    <h4 class="text-3xl font-bold text-center mb-4">Upload de Relatórios</h4>
+    <h4 class="text-3xl font-bold text-center mb-4">Relatórios de Faturamento</h4>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
       <div>
         <label for="ano" class="block text-base font-medium text-gray-700 mb-1">Ano</label>
@@ -74,7 +74,7 @@
           <td>{{ rel.cliente }}</td>
           <td>{{ rel.ano }}</td>
           <td>{{ rel.mes }}</td>
-          <td>{{ rel.colaborador }}</td>
+          <td>{{ rel.recurso.nome }}</td>
           <td>{{ rel.nomeProjeto }}</td>
           <td>{{ rel.horaTotalProjeto }}</td>
         </tr>
